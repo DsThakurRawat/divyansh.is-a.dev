@@ -56,9 +56,19 @@
                 </div>
             </div>
 
-            <div style="display: flex; flex-direction: column; align-items: center; gap: 1rem; margin-bottom: 2rem;">
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 1rem; margin-bottom: 4rem;">
                 <h4 style="color: var(--text-secondary); margin-bottom: 0.5rem; font-weight: 500;">GitHub Trophies</h4>
                 <img src="https://github-profile-trophy.vercel.app/?username=DsThakurRawat&theme=darkhub&no-bg=true&no-frame=true&margin-w=15&margin-h=15" alt="GitHub Trophies" style="width: 100%; max-width: 900px;" onerror="this.style.display='none'">
+            </div>
+
+            <h3 class="section-subtitle github-subtitle" style="margin-top: 4rem;">Featured Projects</h3>
+            <div class="project-list" id="pinned-repos">
+                <!-- Injected via JS -->
+            </div>
+
+            <h3 class="section-subtitle github-subtitle" style="margin-top: 4rem;">Popular Repositories</h3>
+            <div class="project-list" id="popular-repos">
+                <div class="loading" style="grid-column: 1 / -1; color: var(--text-secondary); text-align: center;">Loading popular repositories...</div>
             </div>
 
         </section>

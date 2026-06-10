@@ -393,8 +393,8 @@ a {
 }
 
 .project-list {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
 }
 
@@ -746,7 +746,8 @@ footer {
     .top-nav a {
         font-size: 0.85rem;
     }
-    .project-grid {
+    .project-grid,
+    .project-list {
         grid-template-columns: 1fr;
     }
 }
