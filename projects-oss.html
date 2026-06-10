@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects | Divyansh Rawat</title>
+    <meta name="description" content="Divyansh Rawat — AI Engineer building agentic systems. Open source contributor to LiteLLM. B.Tech ECE (AI/ML) at IIIT Kurnool.">
+    <meta property="og:title" content="Divyansh Rawat — AI Engineer">
+    <meta property="og:description" content="Building agentic AI systems in production.">
+    <meta property="og:url" content="https://divyansh.is-a.dev">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://divyansh.is-a.dev/assets/pfp.jpeg">
+    <link rel="icon" type="image/jpeg" href="assets/pfp.jpeg">
+    <link rel="stylesheet" href="styles.css?v=4">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    </head>
+<body>
+    <!-- Floating Navigation -->
+            <nav class="top-nav">
+        <ul>
+            <li><a href="index.html">HOME</a></li>
+            <li><a href="about.html">ABOUT</a></li>
+            <li><a href="github.html">GITHUB</a></li>
+            <li><a href="projects-oss.html" class="active">PROJECTS & OPEN SOURCE DEVELOPMENT</a></li>
+            <li><a href="rnd.html">RESEARCH & DEVELOPMENT</a></li>
+            <li><a href="cp.html">COMPETITIVE PROGRAMMING</a></li>
+            <li><a href="#" onclick="alert('Resume will be uploaded soon!')">RESUME</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+
+        <section class="page-header" style="margin-bottom: 3rem;">
+            <h1 style="font-size: 2.5rem; margin-bottom: 0.5rem; color: var(--accent-cyan);">Projects & Open Source</h1>
+            <p style="color: var(--text-secondary); font-size: 1.1rem;">My featured projects and popular open-source repositories.</p>
+        </section>
+
+        <section id="projects-oss" class="github-section">
+
+            <h3 class="section-subtitle github-subtitle" style="margin-top: 4rem;">Featured Projects</h3>
+            <div class="project-grid" id="pinned-repos">
+                <!-- Injected via JS -->
+            </div>
+
+            <h3 class="section-subtitle github-subtitle" style="margin-top: 4rem;">Popular Repositories</h3>
+            <div class="project-grid" id="popular-repos">
+                <div class="loading" style="grid-column: 1 / -1; color: var(--text-secondary); text-align: center;">Loading popular repositories...</div>
+            </div>
+        </section>
+
+</main>
+
+    <footer>
+        <p>&copy; 2026 Divyansh Rawat</p>
+    </footer>
+
+    <!-- End of Scripts -->
+    <script src="script.js?v=8"></script>
+</body>
+</html>

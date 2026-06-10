@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Competitive Programming | Divyansh Rawat</title>
+    <meta name="description" content="Divyansh Rawat — AI Engineer building agentic systems. Open source contributor to LiteLLM. B.Tech ECE (AI/ML) at IIIT Kurnool.">
+    <meta property="og:title" content="Divyansh Rawat — AI Engineer">
+    <meta property="og:description" content="Building agentic AI systems in production.">
+    <meta property="og:url" content="https://divyansh.is-a.dev">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://divyansh.is-a.dev/assets/pfp.jpeg">
+    <link rel="icon" type="image/jpeg" href="assets/pfp.jpeg">
+    <link rel="stylesheet" href="styles.css?v=4">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Floating Navigation -->
+            <nav class="top-nav">
+        <ul>
+            <li><a href="index.html">HOME</a></li>
+            <li><a href="about.html">ABOUT</a></li>
+            <li><a href="github.html">GITHUB</a></li>
+            <li><a href="projects-oss.html">PROJECTS & OPEN SOURCE DEVELOPMENT</a></li>
+            <li><a href="rnd.html">RESEARCH & DEVELOPMENT</a></li>
+            <li><a href="cp.html" class="active">COMPETITIVE PROGRAMMING</a></li>
+            <li><a href="#" onclick="alert('Resume will be uploaded soon!')">RESUME</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+
+        <section class="page-header" style="margin-bottom: 3rem;">
+            <h1 style="font-size: 2.5rem; margin-bottom: 0.5rem; color: var(--accent-cyan);">Competitive Programming</h1>
+            <p style="color: var(--text-secondary); font-size: 1.1rem;">My live statistics from LeetCode and Codeforces.</p>
+        </section>
+        
+
+<section id="cp" class="cp-section">
+            <h2 class="section-title">Competitive Programming</h2>
+            
+            <div style="margin-bottom: 25px;">
+                <a href="https://leetcode.com/u/DsThakurRawat/" target="_blank" style="color: #00b8a3; text-decoration: none; font-size: 1.5rem; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; transition: color 0.3s ease;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#00b8a3'">
+                    LeetCode <i class="fas fa-external-link-alt" style="font-size: 0.8rem; color: #ffc01e;"></i>
+                </a>
+            </div>
+            
+            <div class="cp-cards">
+                <!-- LeetCode -->
+                <div class="cp-card lc-card" style="width: 100%; max-width: 1100px;">
+                    <div id="lc-native-dashboard" class="lc-dashboard">
+                        <!-- Left Sidebar -->
+                        <div class="lc-sidebar">
+                            <img id="lc-avatar" src="assets/pfp.jpeg" alt="Avatar" class="lc-avatar">
+                            <h2 id="lc-name" class="lc-name">Loading...</h2>
+                            <p id="lc-username" class="lc-username">...</p>
+                            <div class="lc-rank">Rank <span id="lc-rank-val">...</span></div>
+                            <p id="lc-about" class="lc-about">...</p>
+                            <div class="lc-stats-row">
+                                <div><span class="lc-bold">14</span> Following</div>
+                                <div><span class="lc-bold">9</span> Followers</div>
+                            </div>
+                            <a href="https://leetcode.com/u/DsThakurRawat/" target="_blank" class="lc-edit-btn">View Profile</a>
+                            <div class="lc-meta"><i class="fas fa-map-marker-alt"></i> <span id="lc-country">...</span></div>
+                            <div class="lc-meta" style="margin-bottom: 1.5rem;"><i class="fas fa-graduation-cap"></i> <span id="lc-school">...</span></div>
+
+                            <div class="lc-community-stats">
+                                <h3>Community Stats</h3>
+                                <div class="lc-comm-item"><i class="fas fa-eye"></i> Views <span id="lc-views" class="lc-val-small" style="margin-left: auto;">...</span></div>
+                                <div class="lc-comm-item"><i class="fas fa-check-square" style="color: #00b8a3;"></i> Solution <span id="lc-solutions" class="lc-val-small" style="margin-left: auto;">...</span></div>
+                                <div class="lc-comm-item"><i class="fas fa-comment-alt" style="color: #00b8a3;"></i> Discuss <span id="lc-discuss" class="lc-val-small" style="margin-left: auto;">...</span></div>
+                                <div class="lc-comm-item"><i class="fas fa-star" style="color: #ffc01e;"></i> Reputation <span id="lc-reputation" class="lc-val-small" style="margin-left: auto;">...</span></div>
+                            </div>
+                        </div>
+
+                        <!-- Right Main Content -->
+                        <div class="lc-main">
+                            <!-- Top Row: Rating & Top % -->
+                            <div class="lc-row">
+                                <div class="lc-card lc-graph-card">
+                                    <div class="lc-card-header">
+                                        <div class="lc-rating-info">
+                                            <div class="lc-label">Contest Rating</div>
+                                            <div id="lc-rating-val" class="lc-val">...</div>
+                                        </div>
+                                        <div class="lc-rating-info">
+                                            <div class="lc-label">Global Ranking</div>
+                                            <div id="lc-global-rank" class="lc-val-small">...</div>
+                                        </div>
+                                        <div class="lc-rating-info">
+                                            <div class="lc-label">Attended</div>
+                                            <div id="lc-attended" class="lc-val-small">...</div>
+                                        </div>
+                                    </div>
+                                    <div class="lc-graph-wrapper">
+                                        <canvas id="lc-rating-chart"></canvas>
+                                    </div>
+                                </div>
+                                <div class="lc-card lc-top-card" style="justify-content: flex-start; padding-bottom: 0;">
+                                    <div class="lc-label">Top</div>
+                                    <div id="lc-top-val" class="lc-val">...</div>
+                                    <div class="lc-histogram" style="margin-top: auto; display: flex; align-items: flex-end; gap: 2px; height: 60px; width: 100%;">
+                                        <div class="lc-bar" style="height: 5%;"></div>
+                                        <div class="lc-bar" style="height: 5%;"></div>
+                                        <div class="lc-bar" style="height: 5%;"></div>
+                                        <div class="lc-bar" style="height: 5%;"></div>
+                                        <div class="lc-bar" style="height: 8%;"></div>
+                                        <div class="lc-bar" style="height: 15%;"></div>
+                                        <div class="lc-bar" style="height: 45%;"></div>
+                                        <div class="lc-bar" style="height: 80%;"></div>
+                                        <div class="lc-bar" style="height: 55%;"></div>
+                                        <div class="lc-bar" style="height: 35%;"></div>
+                                        <div class="lc-bar" style="height: 25%;"></div>
+                                        <div class="lc-bar" style="height: 18%;"></div>
+                                        <div class="lc-bar active" style="height: 12%;"></div>
+                                        <div class="lc-bar" style="height: 8%;"></div>
+                                        <div class="lc-bar" style="height: 5%;"></div>
+                                        <div class="lc-bar" style="height: 5%;"></div>
+                                        <div class="lc-bar" style="height: 5%;"></div>
+                                        <div class="lc-bar" style="height: 5%;"></div>
+                                        <div class="lc-bar" style="height: 5%;"></div>
+                                        <div class="lc-bar" style="height: 5%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Middle Row: Solved Stats -->
+                            <div class="lc-row">
+                                <div class="lc-card lc-solved-card">
+                                    <div class="lc-circle-wrapper">
+                                        <!-- Dynamic SVG Circle injected by JS -->
+                                        <svg viewBox="0 0 100 100" class="lc-progress-circle">
+                                            <circle cx="50" cy="50" r="45" class="lc-circle-bg"></circle>
+                                            <circle cx="50" cy="50" r="45" class="lc-circle-easy" id="lc-circle-easy"></circle>
+                                            <circle cx="50" cy="50" r="45" class="lc-circle-medium" id="lc-circle-medium"></circle>
+                                            <circle cx="50" cy="50" r="45" class="lc-circle-hard" id="lc-circle-hard"></circle>
+                                        </svg>
+                                        <div class="lc-circle-text">
+                                            <div id="lc-total-solved" class="lc-val-large">...</div>
+                                            <div class="lc-label">Solved</div>
+                                        </div>
+                                    </div>
+                                    <div class="lc-diff-bars">
+                                        <div class="lc-diff-bar">
+                                            <div class="lc-diff-label easy">Easy <span id="lc-easy-val">...</span></div>
+                                            <div class="lc-bar-bg"><div id="lc-easy-bar" class="lc-bar-fill bg-easy"></div></div>
+                                        </div>
+                                        <div class="lc-diff-bar">
+                                            <div class="lc-diff-label medium">Med. <span id="lc-medium-val">...</span></div>
+                                            <div class="lc-bar-bg"><div id="lc-medium-bar" class="lc-bar-fill bg-medium"></div></div>
+                                        </div>
+                                        <div class="lc-diff-bar">
+                                            <div class="lc-diff-label hard">Hard <span id="lc-hard-val">...</span></div>
+                                            <div class="lc-bar-bg"><div id="lc-hard-bar" class="lc-bar-fill bg-hard"></div></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Bottom Row: Heatmap -->
+                            <div class="lc-card lc-heatmap-card">
+                                <div class="lc-card-header" style="margin-bottom: 1rem;">
+                                    <div><span id="lc-total-subs" class="lc-val" style="font-size: 1.2rem;">...</span> <span class="lc-label">submissions in the past one year</span></div>
+                                </div>
+                                <div id="lc-custom-heatmap" class="heatmap-grid" style="gap: 2px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Codeforces -->
+                <div class="cp-card cf-card" style="display: flex; flex-direction: column; align-items: center; gap: 1rem;">
+                    <div class="cp-card-header" style="width: 100%;">
+                        <h3 style="display: flex; align-items: center; gap: 10px;"><img src="assets/cf-icon.webp" alt="" style="width: 24px; height: 24px;"> Codeforces</h3>
+                        <a href="https://codeforces.com/profile/lost_boy21" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+                    </div>
+                    <div id="cf-fallback" style="display: flex; flex-direction: column; align-items: center; gap: 1rem; width: 100%;">
+                        <img src="https://codeforces-readme-stats.vercel.app/api/card?username=lost_boy21&theme=dark" alt="Codeforces Stats" style="width: 100%; max-width: 600px; border-radius: 8px;">
+                        
+                        <div class="lc-card" style="width: 100%; max-width: 1100px; align-items: center; border: none; padding: 0;">
+                            <img src="https://codeforces-stats-vlx.vercel.app/api/graph?username=lost_boy21&theme=dark" alt="Codeforces Rating Graph" style="width: 100%; max-width: 600px; border-radius: 8px;">
+                        </div>
+                    </div>
+
+                    <div id="cf-native-container" style="display: none; width: 100%;">
+                        <div class="lc-card" style="width: 100%; max-width: 1100px; margin-top: 1rem;">
+                            <h4 style="margin: 0 0 1rem 0; font-size: 1.1rem; color: var(--text-primary); font-weight: 500;">Rating History</h4>
+                            <div style="height: 250px; width: 100%; position: relative;">
+                                <canvas id="cf-rating-chart"></canvas>
+                            </div>
+                        </div>
+
+                        <div class="lc-card" style="width: 100%; max-width: 1100px; margin-top: 1rem;">
+                            <h4 style="margin: 0 0 1rem 0; font-size: 1.1rem; color: var(--text-primary); font-weight: 500;">Activity</h4>
+                            <div id="cf-custom-heatmap" class="heatmap-grid" style="gap: 2px;">
+                                <div class="loading">Building Heatmap...</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+</main>
+
+    <footer>
+        <p>&copy; 2026 Divyansh Rawat</p>
+    </footer>
+
+    <!-- End of Scripts -->
+    <script src="script.js?v=8"></script>
+</body>
+</html>
