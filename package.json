@@ -1,0 +1,12 @@
+{
+  "name": "divyansh.is-a.dev",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Portfolio website",
+  "scripts": {
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  }
+}
