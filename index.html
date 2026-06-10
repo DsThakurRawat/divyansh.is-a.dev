@@ -10,302 +10,98 @@
     <meta property="og:url" content="https://divyansh.is-a.dev">
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://divyansh.is-a.dev/pfp.jpeg">
-    <link rel="icon" type="image/jpeg" href="pfp.jpeg">
+    <link rel="icon" type="image/jpeg" href="assets/pfp.jpeg">
     <link rel="stylesheet" href="styles.css?v=4">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <!-- Floating Navigation -->
-    <nav class="top-nav">
+        <nav class="top-nav">
         <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#github">GitHub</a></li>
-            <li><a href="#rnd">Research & Development</a></li>
-            <li><a href="#cp">Competitive Programming</a></li>
-            <li><a href="#resume">Resume</a></li>
+            <li><a href="index.html" class="active">HOME</a></li>
+            <li><a href="about.html">ABOUT</a></li>
+            <li><a href="github.html">GITHUB</a></li>
+            <li><a href="rnd.html">RESEARCH & DEVELOPMENT</a></li>
+            <li><a href="cp.html">COMPETITIVE PROGRAMMING</a></li>
+            <li><a href="#" onclick="alert('Resume will be uploaded soon!')">RESUME</a></li>
         </ul>
     </nav>
 
     <main class="container">
-        <!-- Hero / Profile Section -->
-        <section id="home" class="profile-section">
-            <div class="profile-header">
-                <img src="pfp.jpeg" alt="Divyansh Rawat" class="profile-image">
-                <div class="profile-info">
-                    <h1>Divyansh Rawat</h1>
-                    <div class="status-pill">
-                        <span class="status-dot"></span> Open for full time opportunities and internships
-                    </div>
-                </div>
-            </div>
-            
-            <div id="about" class="about-grid">
-                <div class="about-block">
-                    <p>I'm an AI & Backend Engineer specializing in Distributed Systems, Agentic AI, and Deep Machine Learning. I build intelligent systems from the ground up, whether it's robust backend services in Go and Rust, or orchestrating multi-agent networks in Python and TypeScript. In my free time, I focus on competitive programming to sharpen my algorithmic thinking.</p>
-                </div>
-                <div class="experience-block">
-                    <h3 class="exp-title"><i class="fas fa-briefcase"></i> Experience</h3>
-                    <div class="exp-item">
-                        <div class="exp-role">Growth & AI Engineering Intern</div>
-                        <div class="exp-company"><a href="https://blipai.app" target="_blank" rel="noopener noreferrer" style="color: var(--accent-cyan); text-decoration: none;">Blipai.app</a></div>
-                        <div class="exp-date">April 2026 - Present</div>
-                    </div>
-                </div>
-            </div>
 
-            <div class="social-links">
+        <section class="hero-landing" style="min-height: 70vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: relative;">
+            
+            <div class="glow-orb" style="position: absolute; width: 400px; height: 400px; background: radial-gradient(circle, var(--accent-cyan) 0%, transparent 70%); opacity: 0.15; filter: blur(60px); z-index: 0; animation: pulseGlow 4s infinite alternate;"></div>
+
+            <div style="position: relative; z-index: 1;">
+                <div class="status-badge" style="display: inline-flex; align-items: center; gap: 8px; background: rgba(0, 240, 255, 0.1); border: 1px solid rgba(0, 240, 255, 0.2); padding: 6px 16px; border-radius: 20px; font-size: 0.85rem; color: var(--accent-cyan); font-family: 'JetBrains Mono', monospace; margin-bottom: 2rem;">
+                    <span class="status-dot" style="width: 8px; height: 8px; background: var(--accent-cyan); border-radius: 50%; box-shadow: 0 0 10px var(--accent-cyan); animation: blink 2s infinite;"></span>
+                    Open for Full-Time Roles
+                </div>
+                
+                <h1 style="font-size: 4rem; font-weight: 800; line-height: 1.1; margin-bottom: 1rem; background: linear-gradient(to right, #fff, #a0a5b1); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                    Divyansh Rawat
+                </h1>
+                <p style="font-size: 1.5rem; color: var(--text-secondary); max-width: 600px; margin: 0 auto 3rem auto; font-weight: 400;">
+                    Building Intelligent Agents & <br> Distributed Systems.
+                </p>
+
+                <div class="terminal-container" style="background: #0f0f17; border: 1px solid #2d2d3d; border-radius: 8px; width: 100%; max-width: 650px; margin: 0 auto; text-align: left; box-shadow: 0 20px 40px rgba(0,0,0,0.4); overflow: hidden;">
+                    <div class="terminal-header" style="background: #1a1a24; padding: 10px 16px; display: flex; gap: 8px; border-bottom: 1px solid #2d2d3d;">
+                        <div style="width: 12px; height: 12px; border-radius: 50%; background: #ff5f56;"></div>
+                        <div style="width: 12px; height: 12px; border-radius: 50%; background: #ffbd2e;"></div>
+                        <div style="width: 12px; height: 12px; border-radius: 50%; background: #27c93f;"></div>
+                        <div style="margin-left: auto; color: #888; font-size: 0.8rem; font-family: 'JetBrains Mono', monospace;">guest@divyansh: ~</div>
+                    </div>
+                    <div class="terminal-body" style="padding: 20px; font-family: 'JetBrains Mono', monospace; font-size: 0.95rem; color: #e2e8f0; line-height: 1.6;">
+                        <div style="color: var(--accent-cyan);">> ./whoami</div>
+                        <div style="margin-bottom: 15px; color: #a0a5b1;">Divyansh Rawat - AI & Backend Engineer.</div>
+                        
+                        <div style="color: var(--accent-cyan);">> cat current_focus.txt</div>
+                        <div style="margin-bottom: 15px; color: #a0a5b1;">Growth & AI Engineering @ Blipai.app<br>Architecting Multi-Agent Networks & Open Source.</div>
+                        
+                        <div style="color: var(--accent-cyan);">> echo $SKILLS</div>
+                        <div style="color: #27c93f; display: flex; flex-wrap: wrap; gap: 8px;">
+                            <span>[Go]</span>
+                            <span>[Python]</span>
+                            <span>[Rust]</span>
+                            <span>[Distributed Systems]</span>
+                            <span>[Agentic AI]</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 3rem; display: flex; gap: 1rem; justify-content: center;">
+                    <a href="github.html" style="background: var(--accent-cyan); color: #000; padding: 12px 24px; border-radius: 6px; font-weight: 600; text-decoration: none; font-size: 1.05rem; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);">
+                        View Projects
+                    </a>
+                    <a href="about.html" style="background: transparent; color: #fff; border: 1px solid var(--border); padding: 12px 24px; border-radius: 6px; font-weight: 500; text-decoration: none; font-size: 1.05rem; transition: background 0.2s;">
+                        More About Me
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Keep Social Links below Hero -->
+        <section class="profile-section" style="padding-top: 0;">
+            <div class="social-links" style="justify-content: center; margin-top: 2rem;">
                 <a href="https://github.com/DsThakurRawat" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
                 <a href="https://www.linkedin.com/in/divyansh-rawat-aba930313/" target="_blank" aria-label="LinkedIn">
-                    <img src="linkeidn-logo.webp" alt="LinkedIn" style="width: 24px; height: 24px; position: relative; z-index: 1;">
+                    <img src="assets/linkeidn-logo.webp" alt="LinkedIn" style="width: 24px; height: 24px; position: relative; z-index: 1;">
                 </a>
                 <a href="https://leetcode.com/u/DsThakurRawat/" target="_blank" aria-label="LeetCode">
-                    <img src="leet.png" alt="LeetCode" style="width: 24px; height: 24px; position: relative; z-index: 1;">
+                    <img src="assets/leet.png" alt="LeetCode" style="width: 24px; height: 24px; position: relative; z-index: 1;">
                 </a>
                 <a href="https://codeforces.com/profile/lost_boy21" target="_blank" aria-label="Codeforces">
-                    <img src="cf-icon.webp" alt="Codeforces" style="width: 24px; height: 24px; position: relative; z-index: 1;">
+                    <img src="assets/cf-icon.webp" alt="Codeforces" style="width: 24px; height: 24px; position: relative; z-index: 1;">
                 </a>
             </div>
         </section>
 
-        <!-- Tech Stack -->
-        <section class="tech-section">
-            <h2 class="section-title">Tech Stack</h2>
-            <div class="tech-grid">
-                <div class="tech-pill"><i class="fab fa-golang"></i> Golang</div>
-                <div class="tech-pill"><i class="fab fa-python"></i> Python</div>
-                <div class="tech-pill"><i class="fab fa-rust"></i> Rust</div>
-                <div class="tech-pill"><i class="fab fa-js"></i> TypeScript</div>
-                <div class="tech-pill"><i class="fas fa-server"></i> Distributed Systems</div>
-                <div class="tech-pill"><i class="fas fa-network-wired"></i> LangGraph</div>
-                <div class="tech-pill"><i class="fas fa-link"></i> LangChain</div>
-                <div class="tech-pill"><i class="fas fa-project-diagram"></i> MCPs</div>
-                <div class="tech-pill"><i class="fas fa-robot"></i> LiteLLM</div>
-                <div class="tech-pill"><i class="fas fa-brain"></i> Pydantic-AI</div>
-                <div class="tech-pill"><i class="fas fa-database"></i> PostgreSQL</div>
-                <div class="tech-pill"><i class="fab fa-docker"></i> Docker</div>
-            </div>
-        </section>
-
-        <!-- GitHub Activity & Pinned Repos -->
-        <section id="github" class="github-section">
-            <h2 class="section-title">GitHub Activity & Pinned Repos</h2>
-            
-            <div class="github-stats-container" style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-bottom: 2rem;">
-                <img src="https://github-readme-stats.vercel.app/api?username=DsThakurRawat&show_icons=true&theme=dark&bg_color=141423&hide_border=true&title_color=00F0FF&icon_color=00F0FF&text_color=E2E8F0" alt="GitHub Stats" class="github-stats-img" onerror="this.style.display='none'">
-                <img src="https://streak-stats.demolab.com/?user=DsThakurRawat&theme=dark&background=141423&border=141423&ring=00F0FF&fire=00F0FF&currStreakLabel=00F0FF&stroke=00F0FF&currStreakNum=E2E8F0&sideNums=E2E8F0&sideLabels=E2E8F0" alt="GitHub Streak" class="github-stats-img" onerror="this.style.display='none'">
-            </div>
-
-            <div class="github-calendar-wrapper" style="display: flex; flex-direction: column; align-items: center; gap: 2rem;">
-                <img src="https://github-readme-activity-graph.vercel.app/graph?username=DsThakurRawat&bg_color=141423&color=00F0FF&line=00F0FF&point=E2E8F0&area=true&hide_border=true" alt="GitHub Activity Graph" style="width: 100%; max-width: 1100px; border-radius: 8px;" onerror="this.style.display='none'">
-                <h4 style="color: var(--text-secondary); margin-bottom: -1rem; font-weight: 500;">Contribution Heatmap</h4>
-                <img src="https://ghchart.rshah.org/00F0FF/DsThakurRawat" alt="GitHub Contributions Heatmap" style="width: 100%; max-width: 900px;" onerror="this.style.display='none'; this.previousElementSibling.style.display='none';">
-            </div>
-
-            <h3 class="section-subtitle github-subtitle">Pinned Repositories</h3>
-            <div class="project-grid" id="pinned-repos">
-                <!-- Injected via JS -->
-            </div>
-
-            <h3 class="section-subtitle github-subtitle" style="margin-top: 4rem;">Popular Repositories</h3>
-            <div class="project-grid" id="popular-repos">
-                <div class="loading" style="grid-column: 1 / -1; color: var(--text-secondary); text-align: center;">Loading popular repositories...</div>
-            </div>
-        </section>
-
-        <!-- Research & Development -->
-        <section id="rnd" class="rnd-section">
-            <h2 class="section-title">Research & Development</h2>
-            <p class="section-subtitle">Core contributions to open source AI systems and research.</p>
-            <div class="project-grid" id="rnd-repos">
-                <!-- Injected via JS -->
-            </div>
-        </section>
-
-        <!-- Competitive Programming -->
-        <section id="cp" class="cp-section">
-            <h2 class="section-title">Competitive Programming</h2>
-            
-            <div style="margin-bottom: 25px;">
-                <a href="https://leetcode.com/u/DsThakurRawat/" target="_blank" style="color: #00b8a3; text-decoration: none; font-size: 1.5rem; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; transition: color 0.3s ease;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#00b8a3'">
-                    LeetCode <i class="fas fa-external-link-alt" style="font-size: 0.8rem; color: #ffc01e;"></i>
-                </a>
-            </div>
-            
-            <div class="cp-cards">
-                <!-- LeetCode -->
-                <div class="cp-card lc-card" style="width: 100%; max-width: 1100px;">
-                    <div id="lc-native-dashboard" class="lc-dashboard">
-                        <!-- Left Sidebar -->
-                        <div class="lc-sidebar">
-                            <img id="lc-avatar" src="pfp.jpeg" alt="Avatar" class="lc-avatar">
-                            <h2 id="lc-name" class="lc-name">Loading...</h2>
-                            <p id="lc-username" class="lc-username">...</p>
-                            <div class="lc-rank">Rank <span id="lc-rank-val">...</span></div>
-                            <p id="lc-about" class="lc-about">...</p>
-                            <div class="lc-stats-row">
-                                <div><span class="lc-bold">14</span> Following</div>
-                                <div><span class="lc-bold">9</span> Followers</div>
-                            </div>
-                            <a href="https://leetcode.com/u/DsThakurRawat/" target="_blank" class="lc-edit-btn">View Profile</a>
-                            <div class="lc-meta"><i class="fas fa-map-marker-alt"></i> <span id="lc-country">...</span></div>
-                            <div class="lc-meta" style="margin-bottom: 1.5rem;"><i class="fas fa-graduation-cap"></i> <span id="lc-school">...</span></div>
-
-                            <div class="lc-community-stats">
-                                <h3>Community Stats</h3>
-                                <div class="lc-comm-item"><i class="fas fa-eye"></i> Views <span id="lc-views" class="lc-val-small" style="margin-left: auto;">...</span></div>
-                                <div class="lc-comm-item"><i class="fas fa-check-square" style="color: #00b8a3;"></i> Solution <span id="lc-solutions" class="lc-val-small" style="margin-left: auto;">...</span></div>
-                                <div class="lc-comm-item"><i class="fas fa-comment-alt" style="color: #00b8a3;"></i> Discuss <span id="lc-discuss" class="lc-val-small" style="margin-left: auto;">...</span></div>
-                                <div class="lc-comm-item"><i class="fas fa-star" style="color: #ffc01e;"></i> Reputation <span id="lc-reputation" class="lc-val-small" style="margin-left: auto;">...</span></div>
-                            </div>
-                        </div>
-
-                        <!-- Right Main Content -->
-                        <div class="lc-main">
-                            <!-- Top Row: Rating & Top % -->
-                            <div class="lc-row">
-                                <div class="lc-card lc-graph-card">
-                                    <div class="lc-card-header">
-                                        <div class="lc-rating-info">
-                                            <div class="lc-label">Contest Rating</div>
-                                            <div id="lc-rating-val" class="lc-val">...</div>
-                                        </div>
-                                        <div class="lc-rating-info">
-                                            <div class="lc-label">Global Ranking</div>
-                                            <div id="lc-global-rank" class="lc-val-small">...</div>
-                                        </div>
-                                        <div class="lc-rating-info">
-                                            <div class="lc-label">Attended</div>
-                                            <div id="lc-attended" class="lc-val-small">...</div>
-                                        </div>
-                                    </div>
-                                    <div class="lc-graph-wrapper">
-                                        <canvas id="lc-rating-chart"></canvas>
-                                    </div>
-                                </div>
-                                <div class="lc-card lc-top-card" style="justify-content: flex-start; padding-bottom: 0;">
-                                    <div class="lc-label">Top</div>
-                                    <div id="lc-top-val" class="lc-val">...</div>
-                                    <div class="lc-histogram" style="margin-top: auto; display: flex; align-items: flex-end; gap: 2px; height: 60px; width: 100%;">
-                                        <div class="lc-bar" style="height: 5%;"></div>
-                                        <div class="lc-bar" style="height: 5%;"></div>
-                                        <div class="lc-bar" style="height: 5%;"></div>
-                                        <div class="lc-bar" style="height: 5%;"></div>
-                                        <div class="lc-bar" style="height: 8%;"></div>
-                                        <div class="lc-bar" style="height: 15%;"></div>
-                                        <div class="lc-bar" style="height: 45%;"></div>
-                                        <div class="lc-bar" style="height: 80%;"></div>
-                                        <div class="lc-bar" style="height: 55%;"></div>
-                                        <div class="lc-bar" style="height: 35%;"></div>
-                                        <div class="lc-bar" style="height: 25%;"></div>
-                                        <div class="lc-bar" style="height: 18%;"></div>
-                                        <div class="lc-bar active" style="height: 12%;"></div>
-                                        <div class="lc-bar" style="height: 8%;"></div>
-                                        <div class="lc-bar" style="height: 5%;"></div>
-                                        <div class="lc-bar" style="height: 5%;"></div>
-                                        <div class="lc-bar" style="height: 5%;"></div>
-                                        <div class="lc-bar" style="height: 5%;"></div>
-                                        <div class="lc-bar" style="height: 5%;"></div>
-                                        <div class="lc-bar" style="height: 5%;"></div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Middle Row: Solved Stats -->
-                            <div class="lc-row">
-                                <div class="lc-card lc-solved-card">
-                                    <div class="lc-circle-wrapper">
-                                        <!-- Dynamic SVG Circle injected by JS -->
-                                        <svg viewBox="0 0 100 100" class="lc-progress-circle">
-                                            <circle cx="50" cy="50" r="45" class="lc-circle-bg"></circle>
-                                            <circle cx="50" cy="50" r="45" class="lc-circle-easy" id="lc-circle-easy"></circle>
-                                            <circle cx="50" cy="50" r="45" class="lc-circle-medium" id="lc-circle-medium"></circle>
-                                            <circle cx="50" cy="50" r="45" class="lc-circle-hard" id="lc-circle-hard"></circle>
-                                        </svg>
-                                        <div class="lc-circle-text">
-                                            <div id="lc-total-solved" class="lc-val-large">...</div>
-                                            <div class="lc-label">Solved</div>
-                                        </div>
-                                    </div>
-                                    <div class="lc-diff-bars">
-                                        <div class="lc-diff-bar">
-                                            <div class="lc-diff-label easy">Easy <span id="lc-easy-val">...</span></div>
-                                            <div class="lc-bar-bg"><div id="lc-easy-bar" class="lc-bar-fill bg-easy"></div></div>
-                                        </div>
-                                        <div class="lc-diff-bar">
-                                            <div class="lc-diff-label medium">Med. <span id="lc-medium-val">...</span></div>
-                                            <div class="lc-bar-bg"><div id="lc-medium-bar" class="lc-bar-fill bg-medium"></div></div>
-                                        </div>
-                                        <div class="lc-diff-bar">
-                                            <div class="lc-diff-label hard">Hard <span id="lc-hard-val">...</span></div>
-                                            <div class="lc-bar-bg"><div id="lc-hard-bar" class="lc-bar-fill bg-hard"></div></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Bottom Row: Heatmap -->
-                            <div class="lc-card lc-heatmap-card">
-                                <div class="lc-card-header" style="margin-bottom: 1rem;">
-                                    <div><span id="lc-total-subs" class="lc-val" style="font-size: 1.2rem;">...</span> <span class="lc-label">submissions in the past one year</span></div>
-                                </div>
-                                <div id="lc-custom-heatmap" class="heatmap-grid" style="gap: 2px;"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Codeforces -->
-                <div class="cp-card cf-card" style="display: flex; flex-direction: column; align-items: center; gap: 1rem;">
-                    <div class="cp-card-header" style="width: 100%;">
-                        <h3 style="display: flex; align-items: center; gap: 10px;"><img src="cf-icon.webp" alt="" style="width: 24px; height: 24px;"> Codeforces</h3>
-                        <a href="https://codeforces.com/profile/lost_boy21" target="_blank"><i class="fas fa-external-link-alt"></i></a>
-                    </div>
-                    <div id="cf-fallback" style="display: flex; flex-direction: column; align-items: center; gap: 1rem; width: 100%;">
-                        <img src="https://codeforces-readme-stats.vercel.app/api/card?username=lost_boy21&theme=dark" alt="Codeforces Stats" style="width: 100%; max-width: 600px; border-radius: 8px;">
-                        
-                        <div class="lc-card" style="width: 100%; max-width: 1100px; align-items: center; border: none; padding: 0;">
-                            <img src="https://codeforces-stats-vlx.vercel.app/api/graph?username=lost_boy21&theme=dark" alt="Codeforces Rating Graph" style="width: 100%; max-width: 600px; border-radius: 8px;">
-                        </div>
-                    </div>
-
-                    <div id="cf-native-container" style="display: none; width: 100%;">
-                        <div class="lc-card" style="width: 100%; max-width: 1100px; margin-top: 1rem;">
-                            <h4 style="margin: 0 0 1rem 0; font-size: 1.1rem; color: var(--text-primary); font-weight: 500;">Rating History</h4>
-                            <div style="height: 250px; width: 100%; position: relative;">
-                                <canvas id="cf-rating-chart"></canvas>
-                            </div>
-                        </div>
-
-                        <div class="lc-card" style="width: 100%; max-width: 1100px; margin-top: 1rem;">
-                            <h4 style="margin: 0 0 1rem 0; font-size: 1.1rem; color: var(--text-primary); font-weight: 500;">Activity</h4>
-                            <div id="cf-custom-heatmap" class="heatmap-grid" style="gap: 2px;">
-                                <div class="loading">Building Heatmap...</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Resume Section -->
-        <section id="resume" class="resume-section">
-            <h2 class="section-title">Resume</h2>
-            <div class="resume-card">
-                <div class="resume-info">
-                    <h3>Curriculum Vitae</h3>
-                    <p>Detailed view of my experience, education, and skills.</p>
-                </div>
-                <a href="#" class="btn-download" onclick="alert('Resume will be uploaded soon!')">
-                    <i class="fas fa-download"></i> Download Resume
-                </a>
-            </div>
-        </section>
     </main>
 
     <footer>

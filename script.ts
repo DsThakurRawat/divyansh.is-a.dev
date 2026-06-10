@@ -175,6 +175,7 @@ async function fetchPopularRepos() {
 }
 
 async function renderCodeforcesGraph() {
+    if (!document.getElementById('cf-rating-chart')) return;
     const handle = 'lost_boy21';
     try {
         const CACHE_KEY = 'cf_graph_data_v2';
@@ -250,6 +251,7 @@ async function renderCodeforcesGraph() {
 
 // Function to render custom Codeforces heatmap
 async function renderCodeforcesHeatmap() {
+    if (!document.getElementById('cf-custom-heatmap')) return;
     const handle = 'lost_boy21';
     const container = document.getElementById('cf-custom-heatmap');
     if (!container) return;
@@ -412,6 +414,7 @@ async function renderCodeforcesHeatmap() {
 
 // Function to render native LeetCode dashboard
 async function renderLeetCodeDashboard() {
+    if (!document.getElementById('lc-native-dashboard')) return;
     const handle = 'DsThakurRawat';
     
     try {
@@ -453,7 +456,7 @@ async function renderLeetCodeDashboard() {
         }
 
         // 1. Populate Profile Sidebar
-        document.getElementById('lc-avatar')!.setAttribute('src', data.profile.avatar || 'leet.png');
+        document.getElementById('lc-avatar')!.setAttribute('src', data.profile.avatar || 'assets/leet.png');
         document.getElementById('lc-name')!.textContent = data.profile.name || handle;
         document.getElementById('lc-username')!.textContent = handle;
         document.getElementById('lc-rank-val')!.textContent = (data.profile.ranking || 0).toLocaleString();
