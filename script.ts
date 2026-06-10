@@ -456,39 +456,39 @@ async function renderLeetCodeDashboard() {
         }
 
         // 1. Populate Profile Sidebar
-        document.getElementById('lc-avatar')!.setAttribute('src', data.profile.avatar || 'assets/leet.png');
-        document.getElementById('lc-name')!.textContent = data.profile.name || handle;
-        document.getElementById('lc-username')!.textContent = handle;
-        document.getElementById('lc-rank-val')!.textContent = (data.profile.ranking || 0).toLocaleString();
-        document.getElementById('lc-about')!.textContent = data.profile.about || '';
-        document.getElementById('lc-country')!.textContent = data.profile.country || 'N/A';
-        document.getElementById('lc-school')!.textContent = data.profile.school || 'N/A';
+        document.getElementById('lc-avatar')?.setAttribute('src', data.profile.avatar || 'assets/leet.png');
+        const el_lc_name = document.getElementById('lc-name'); if(el_lc_name) el_lc_name.textContent = data.profile.name || handle;
+        const el_lc_username = document.getElementById('lc-username'); if(el_lc_username) el_lc_username.textContent = handle;
+        const el_lc_rank_val = document.getElementById('lc-rank-val'); if(el_lc_rank_val) el_lc_rank_val.textContent = (data.profile.ranking || 0).toLocaleString();
+        const el_lc_about = document.getElementById('lc-about'); if(el_lc_about) el_lc_about.textContent = data.profile.about || '';
+        const el_lc_country = document.getElementById('lc-country'); if(el_lc_country) el_lc_country.textContent = data.profile.country || 'N/A';
+        const el_lc_school = document.getElementById('lc-school'); if(el_lc_school) el_lc_school.textContent = data.profile.school || 'N/A';
 
         // 1.5 Populate Community Stats (added in index.html)
         if(document.getElementById('lc-reputation')) {
-            document.getElementById('lc-reputation')!.textContent = (data.profile.reputation || 0).toString();
+            const el_lc_reputation = document.getElementById('lc-reputation'); if(el_lc_reputation) el_lc_reputation.textContent = (data.profile.reputation || 0).toString();
         }
 
         // 2. Populate Contest Stats
-        document.getElementById('lc-rating-val')!.textContent = Math.round(data.contest.contestRating || 0).toString();
-        document.getElementById('lc-global-rank')!.textContent = `${(data.contest.contestGlobalRanking || 0).toLocaleString()}/${(data.contest.totalParticipants || 0).toLocaleString()}`;
-        document.getElementById('lc-attended')!.textContent = (data.contest.contestAttend || 0).toString();
-        document.getElementById('lc-top-val')!.textContent = `${data.contest.contestTopPercentage || 0}%`;
+        const el_lc_rating_val = document.getElementById('lc-rating-val'); if(el_lc_rating_val) el_lc_rating_val.textContent = Math.round(data.contest.contestRating || 0).toString();
+        const el_lc_global_rank = document.getElementById('lc-global-rank'); if(el_lc_global_rank) el_lc_global_rank.textContent = `${(data.contest.contestGlobalRanking || 0).toLocaleString()}/${(data.contest.totalParticipants || 0).toLocaleString()}`;
+        const el_lc_attended = document.getElementById('lc-attended'); if(el_lc_attended) el_lc_attended.textContent = (data.contest.contestAttend || 0).toString();
+        const el_lc_top_val = document.getElementById('lc-top-val'); if(el_lc_top_val) el_lc_top_val.textContent = `${data.contest.contestTopPercentage || 0}%`;
 
         // 3. Populate Solved Stats
         const easyTotal = data.solved.totalSubmissionNum.find((x: any) => x.difficulty === 'Easy')?.count || 0; // Wait, total questions? Wait, the API returns totalSubmissionNum, we want total questions available? Let's use 949 as a fallback if not provided. No, wait, 'alfa-leetcode-api' doesn't easily provide total available per difficulty in /solved. Let's just show what they solved.
         
-        document.getElementById('lc-total-solved')!.textContent = data.solved.solvedProblem || 0;
-        document.getElementById('lc-easy-val')!.textContent = `${data.solved.easySolved || 0}`;
-        document.getElementById('lc-medium-val')!.textContent = `${data.solved.mediumSolved || 0}`;
-        document.getElementById('lc-hard-val')!.textContent = `${data.solved.hardSolved || 0}`;
+        const el_lc_total_solved = document.getElementById('lc-total-solved'); if(el_lc_total_solved) el_lc_total_solved.textContent = data.solved.solvedProblem || 0;
+        const el_lc_easy_val = document.getElementById('lc-easy-val'); if(el_lc_easy_val) el_lc_easy_val.textContent = `${data.solved.easySolved || 0}`;
+        const el_lc_medium_val = document.getElementById('lc-medium-val'); if(el_lc_medium_val) el_lc_medium_val.textContent = `${data.solved.mediumSolved || 0}`;
+        const el_lc_hard_val = document.getElementById('lc-hard-val'); if(el_lc_hard_val) el_lc_hard_val.textContent = `${data.solved.hardSolved || 0}`;
 
         // Populate Community Stats from solved data
         if(document.getElementById('lc-views')) {
             // we don't have views, let's just use what we have or static 408
-            document.getElementById('lc-views')!.textContent = "408"; 
-            document.getElementById('lc-solutions')!.textContent = "21";
-            document.getElementById('lc-discuss')!.textContent = "0";
+            const el_lc_views = document.getElementById('lc-views'); if(el_lc_views) el_lc_views.textContent = "408"; 
+            const el_lc_solutions = document.getElementById('lc-solutions'); if(el_lc_solutions) el_lc_solutions.textContent = "21";
+            const el_lc_discuss = document.getElementById('lc-discuss'); if(el_lc_discuss) el_lc_discuss.textContent = "0";
         }
 
         // Calculate percentages for bars
@@ -557,7 +557,7 @@ async function renderLeetCodeDashboard() {
             html += '</div>';
         }
         document.getElementById('lc-custom-heatmap')!.innerHTML = html;
-        document.getElementById('lc-total-subs')!.textContent = totalSubs.toString();
+        const el_lc_total_subs = document.getElementById('lc-total-subs'); if(el_lc_total_subs) el_lc_total_subs.textContent = totalSubs.toString();
 
         // 5. Draw Contest Graph using Chart.js
         if(data.contest.contestParticipation && data.contest.contestParticipation.length > 0) {
