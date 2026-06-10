@@ -392,6 +392,12 @@ a {
     gap: 2rem;
 }
 
+.project-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
 .project-card {
     background: var(--bg-card);
     backdrop-filter: blur(10px);
