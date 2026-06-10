@@ -4,7 +4,7 @@
   "type": "module",
   "description": "Portfolio website",
   "scripts": {
-    "build": "tsc"
+    "build:local": "tsc"
   },
   "devDependencies": {
     "typescript": "^5.0.0"
