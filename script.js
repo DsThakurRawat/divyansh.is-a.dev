@@ -91,6 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
     renderCards('pinned-repos', pinnedRepos);
+    renderCards('home-pinned-repos', pinnedRepos.slice(0, 2));
     renderCards('rnd-repos', rndProjects);
     // 4. Render Native LeetCode Dashboard
     renderLeetCodeDashboard();
@@ -141,8 +142,8 @@ async function fetchPopularRepos() {
                 <p class="project-desc">${repo.desc}</p>
                 <div class="project-tags">
                     ${repo.tags.map((tag) => `<span class="project-tag">${tag}</span>`).join('')}
-                    <span class="project-tag" style="background: rgba(0, 240, 255, 0.1); color: var(--accent-cyan); border-color: rgba(0, 240, 255, 0.2);"><i class="fas fa-star" style="font-size: 0.8em; margin-right: 4px;"></i>${repo.stars}</span>
-                    <span class="project-tag" style="background: rgba(0, 240, 255, 0.1); color: var(--accent-cyan); border-color: rgba(0, 240, 255, 0.2);"><i class="fas fa-code-branch" style="font-size: 0.8em; margin-right: 4px;"></i>${repo.forks}</span>
+                    <span class="project-tag" style="background: rgba(16, 185, 129, 0.1); color: var(--accent-cyan); border-color: rgba(16, 185, 129, 0.2);"><i class="fas fa-star" style="font-size: 0.8em; margin-right: 4px;"></i>${repo.stars}</span>
+                    <span class="project-tag" style="background: rgba(16, 185, 129, 0.1); color: var(--accent-cyan); border-color: rgba(16, 185, 129, 0.2);"><i class="fas fa-code-branch" style="font-size: 0.8em; margin-right: 4px;"></i>${repo.forks}</span>
                 </div>
                 <div class="project-links">
                     <a href="${repo.url}" target="_blank" aria-label="GitHub Repository"><i class="fab fa-github"></i> View code</a>

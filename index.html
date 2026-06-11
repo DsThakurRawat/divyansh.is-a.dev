@@ -11,15 +11,15 @@
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://divyansh.is-a.dev/assets/pfp.jpeg">
     <link rel="icon" type="image/jpeg" href="assets/pfp.jpeg">
-    <link rel="stylesheet" href="styles.css?v=4">
+    <link rel="stylesheet" href="styles.css?v=5">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    </head>
+</head>
 <body>
     <!-- Floating Navigation -->
-            <nav class="top-nav">
+    <nav class="top-nav">
         <ul>
             <li><a href="index.html" class="active">HOME</a></li>
             <li><a href="about.html">ABOUT</a></li>
@@ -33,68 +33,65 @@
 
     <main class="container">
 
-        <section class="hero-landing" style="min-height: auto; padding: 4rem 0; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: relative;">
-            
-            <div class="glow-orb" style="position: absolute; width: 250px; height: 250px; background: radial-gradient(circle, var(--accent-cyan) 0%, transparent 70%); opacity: 0.15; filter: blur(60px); z-index: 0; animation: pulseGlow 4s infinite alternate;"></div>
-
-            <div style="position: relative; z-index: 1;">
-                <div class="status-badge" style="display: inline-flex; align-items: center; gap: 8px; background: rgba(0, 240, 255, 0.1); border: 1px solid rgba(0, 240, 255, 0.2); padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; color: var(--accent-cyan); font-family: 'JetBrains Mono', monospace; margin-bottom: 1.5rem;">
-                    <span class="status-dot" style="width: 8px; height: 8px; background: var(--accent-cyan); border-radius: 50%; box-shadow: 0 0 10px var(--accent-cyan); animation: pulse 2s infinite;"></span>
-                    Open for Full-Time Roles
-                </div>
-                
-                <div style="margin-bottom: 1.5rem;">
-                    <img src="assets/pfp.jpeg" alt="Divyansh Rawat" style="width: 90px; height: 90px; border-radius: 50%; border: 2px solid var(--accent-cyan); box-shadow: 0 0 20px rgba(0, 240, 255, 0.3); object-fit: cover;">
-                </div>
-
-                <h1 style="font-size: 2.5rem; font-weight: 800; line-height: 1.1; margin-bottom: 0.75rem; background: linear-gradient(to right, #fff, #a0a5b1); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
-                    Divyansh Rawat
-                </h1>
-                <div style="font-size: 1rem; color: var(--text-secondary); max-width: 550px; margin: 0 auto 2rem auto; font-weight: 400; line-height: 1.6;">
-                    <div style="margin-bottom: 1.5rem;">Building the future of <span style="color: #fff;">AI & AI Infra</span></div>
-                    
-                    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 0.8rem;">
-                        <span style="background: rgba(0, 240, 255, 0.05); border: 1px solid rgba(0, 240, 255, 0.2); color: var(--accent-cyan); padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; font-family: 'JetBrains Mono', monospace;">AI Agents</span>
-                        <span style="background: rgba(0, 240, 255, 0.05); border: 1px solid rgba(0, 240, 255, 0.2); color: var(--accent-cyan); padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; font-family: 'JetBrains Mono', monospace;">Agentic AI</span>
-                        <span style="background: rgba(0, 240, 255, 0.05); border: 1px solid rgba(0, 240, 255, 0.2); color: var(--accent-cyan); padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; font-family: 'JetBrains Mono', monospace;">GenAI</span>
-                        <span style="background: rgba(0, 240, 255, 0.05); border: 1px solid rgba(0, 240, 255, 0.2); color: var(--accent-cyan); padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; font-family: 'JetBrains Mono', monospace;">AI/ML</span>
-                        <span style="background: rgba(0, 240, 255, 0.05); border: 1px solid rgba(0, 240, 255, 0.2); color: var(--accent-cyan); padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; font-family: 'JetBrains Mono', monospace;">Deep Learning</span>
-                        <span style="background: rgba(0, 240, 255, 0.05); border: 1px solid rgba(0, 240, 255, 0.2); color: var(--accent-cyan); padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; font-family: 'JetBrains Mono', monospace;">Backend Engineering</span>
+        <!-- Profile Section - Left Aligned like Akansha -->
+        <section class="profile-section">
+            <div class="profile-header">
+                <img src="assets/pfp.jpeg" alt="Divyansh Rawat" class="profile-image">
+                <div class="profile-info">
+                    <h1 style="background: none; -webkit-text-fill-color: unset; color: #fff;">Divyansh<br><span style="color: var(--accent-cyan);">Rawat</span></h1>
+                    <div class="status-pill">
+                        <span class="status-dot"></span> Open for full time opportunities and internships
                     </div>
-                </div>                <div style="margin-top: 2rem; display: flex; gap: 1rem; justify-content: center;">
-                    <a href="projects-oss.html" style="background: var(--accent-cyan); color: #000; padding: 10px 20px; border-radius: 6px; font-weight: 600; text-decoration: none; font-size: 0.9rem; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);">
-                        View Projects
-                    </a>
-                    <a href="about.html" style="background: transparent; color: #fff; border: 1px solid var(--border); padding: 10px 20px; border-radius: 6px; font-weight: 500; text-decoration: none; font-size: 0.9rem; transition: background 0.2s;">
-                        More About Me
-                    </a>
                 </div>
             </div>
-        </section>
 
-        <!-- Keep Social Links below Hero -->
-        <section class="profile-section" style="padding-top: 0;">
-            <div class="social-links" style="justify-content: center; margin-top: 2rem;">
+            <!-- Bio Card -->
+            <div class="about-block" style="width: 100%; margin-bottom: 1.5rem;">
+                <p>I'm an AI & Backend Engineer specializing in Distributed Systems, Agentic AI, and Deep Machine Learning. I build intelligent systems from the ground up — whether it's robust backend services in Go and Rust, or orchestrating multi-agent networks in Python and TypeScript. I'm an open source contributor to LiteLLM, and I've also started writing technical explorations to share my learnings.</p>
+            </div>
+
+            <!-- Social Links -->
+            <div class="social-links">
                 <a href="https://github.com/DsThakurRawat" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
                 <a href="https://www.linkedin.com/in/divyansh-rawat-aba930313/" target="_blank" aria-label="LinkedIn">
-                    <img src="assets/linkeidn-logo.webp" alt="LinkedIn" style="width: 24px; height: 24px; position: relative; z-index: 1;">
+                    <img src="assets/linkeidn-logo.webp" alt="LinkedIn" style="width: 20px; height: 20px; position: relative; z-index: 1;">
                 </a>
-                <a href="https://leetcode.com/u/DsThakurRawat/" target="_blank" aria-label="LeetCode">
-                    <img src="assets/leet.png" alt="LeetCode" style="width: 24px; height: 24px; position: relative; z-index: 1;">
-                </a>
-                <a href="https://codeforces.com/profile/lost_boy21" target="_blank" aria-label="Codeforces">
-                    <img src="assets/cf-icon.webp" alt="Codeforces" style="width: 24px; height: 24px; position: relative; z-index: 1;">
-                </a>
+                <a href="mailto:divyanshrawat@example.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
             </div>
         </section>
 
-    </main>
+        <!-- Tech Stack -->
+        <section class="tech-section">
+            <h2 class="section-title">Tech Stack</h2>
+            <div class="tech-grid">
+                <div class="tech-pill"><i class="fab fa-golang"></i> Golang</div>
+                <div class="tech-pill"><i class="fab fa-python"></i> Python</div>
+                <div class="tech-pill"><i class="fab fa-rust"></i> Rust</div>
+                <div class="tech-pill"><i class="fab fa-js"></i> TypeScript</div>
+                <div class="tech-pill"><i class="fas fa-server"></i> Distributed Systems</div>
+                <div class="tech-pill"><i class="fas fa-network-wired"></i> LangGraph</div>
+                <div class="tech-pill"><i class="fas fa-link"></i> LangChain</div>
+                <div class="tech-pill"><i class="fas fa-project-diagram"></i> MCPs</div>
+                <div class="tech-pill"><i class="fas fa-robot"></i> LiteLLM</div>
+                <div class="tech-pill"><i class="fas fa-brain"></i> Pydantic-AI</div>
+                <div class="tech-pill"><i class="fas fa-database"></i> PostgreSQL</div>
+                <div class="tech-pill"><i class="fab fa-docker"></i> Docker</div>
+            </div>
+        </section>
+
+
+        <!-- GitHub Activity -->
+        <section style="margin-bottom: 3rem;">
+            <h2 class="section-title">GitHub Activity</h2>
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 1rem;">
+                <img src="https://ghchart.rshah.org/10B981/DsThakurRawat" alt="GitHub Contributions Heatmap" style="width: 100%;" onerror="this.style.display='none'">
+            </div>
+        </section>
 
     <footer>
         <p>&copy; 2026 Divyansh Rawat</p>
     </footer>
 
-    <!-- End of Scripts -->
-    <script src="script.js?v=8"></script>
+    <script src="script.js?v=9"></script>
 </body>
 </html>

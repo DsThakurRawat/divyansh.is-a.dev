@@ -2,21 +2,21 @@
    Intelligent System Theme (Cyber/AI Aesthetic)
    ======================================== */
 :root {
-    --bg-main: #05050A;
-    --bg-card: rgba(20, 20, 35, 0.6);
-    --bg-card-hover: rgba(30, 30, 50, 0.8);
-    --bg-nav: rgba(10, 10, 20, 0.7);
+    --bg-main: #0F1923;
+    --bg-card: rgba(15, 30, 45, 0.6);
+    --bg-card-hover: rgba(20, 40, 60, 0.8);
+    --bg-nav: rgba(12, 22, 35, 0.85);
 
     --text-primary: #E2E8F0;
     --text-secondary: #94A3B8;
     --text-muted: #475569;
 
-    --accent-cyan: #00F0FF;
-    --accent-purple: #8A2BE2;
-    --accent-glow: rgba(0, 240, 255, 0.15);
+    --accent-cyan: #10B981;
+    --accent-purple: #059669;
+    --accent-glow: rgba(16, 185, 129, 0.15);
     
     --border: rgba(255, 255, 255, 0.08);
-    --border-hover: rgba(0, 240, 255, 0.4);
+    --border-hover: rgba(16, 185, 129, 0.4);
 
     --radius-sm: 4px;
     --radius-md: 16px;
@@ -60,13 +60,13 @@ body::before, body::after {
 body::before {
     top: -200px;
     left: -200px;
-    background: radial-gradient(circle, rgba(138, 43, 226, 0.15), transparent 70%);
+    background: radial-gradient(circle, rgba(5, 150, 105, 0.12), transparent 70%);
 }
 
 body::after {
     bottom: -200px;
     right: -200px;
-    background: radial-gradient(circle, rgba(0, 240, 255, 0.1), transparent 70%);
+    background: radial-gradient(circle, rgba(16, 185, 129, 0.1), transparent 70%);
 }
 
 a {
@@ -142,30 +142,28 @@ a {
 }
 
 .profile-image {
-    width: 90px;
-    height: 90px;
-    border-radius: 50%;
+    width: 110px;
+    height: 110px;
+    border-radius: 16px;
     object-fit: cover;
-    border: 2px solid var(--accent-cyan);
-    box-shadow: 0 0 20px var(--accent-glow);
+    border: none;
+    box-shadow: none;
 }
 
 .profile-info h1 {
-    font-size: 2.25rem;
+    font-size: 3rem;
     font-weight: 800;
     line-height: 1.1;
     margin-bottom: 0.75rem;
-    background: linear-gradient(90deg, #FFFFFF, var(--accent-cyan));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: #FFFFFF;
 }
 
 .status-pill {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    background: rgba(0, 240, 255, 0.05);
-    border: 1px solid rgba(0, 240, 255, 0.2);
+    background: rgba(16, 185, 129, 0.05);
+    border: 1px solid rgba(16, 185, 129, 0.2);
     padding: 0.5rem 1.25rem;
     border-radius: var(--radius-pill);
     font-size: 0.8rem;
@@ -200,9 +198,9 @@ a {
     background: var(--bg-card);
     backdrop-filter: blur(10px);
     border: 1px solid var(--border);
-    border-left: 3px solid var(--accent-purple);
-    border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
-    padding: 2rem;
+    border-left: 3px solid var(--accent-cyan);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
 }
 
 .about-block p {
@@ -234,7 +232,7 @@ a {
 }
 
 .exp-item {
-    border-left: 2px solid rgba(138, 43, 226, 0.4);
+    border-left: 2px solid rgba(16, 185, 129, 0.4);
     padding-left: 1rem;
 }
 
@@ -314,7 +312,7 @@ a {
 
 .section-title::before {
     content: '>>';
-    color: var(--accent-purple);
+    color: var(--accent-cyan);
     font-family: 'JetBrains Mono', monospace;
     font-size: 1.5rem;
 }
@@ -372,7 +370,7 @@ a {
 .tech-pill:hover {
     border-color: var(--accent-cyan);
     color: var(--accent-cyan);
-    background: rgba(0, 240, 255, 0.05);
+    background: rgba(16, 185, 129, 0.05);
     box-shadow: 0 0 10px var(--accent-glow);
 }
 .tech-pill:hover i {
@@ -440,13 +438,13 @@ a {
 }
 
 .project-tag {
-    background: rgba(138, 43, 226, 0.1);
-    color: #d8b4fe;
+    background: rgba(16, 185, 129, 0.1);
+    color: #6ee7b7;
     font-size: 0.75rem;
     font-family: 'JetBrains Mono', monospace;
     padding: 0.25rem 0.6rem;
     border-radius: var(--radius-sm);
-    border: 1px solid rgba(138, 43, 226, 0.2);
+    border: 1px solid rgba(16, 185, 129, 0.2);
 }
 
 .project-links a {
@@ -485,7 +483,7 @@ a {
 
 .github-stats-container img:hover {
     opacity: 1;
-    filter: drop-shadow(0 0 15px rgba(0, 240, 255, 0.15));
+    filter: drop-shadow(0 0 15px rgba(16, 185, 129, 0.15));
 }
 
 .github-calendar-wrapper {
@@ -600,7 +598,7 @@ a {
 }
 /* Hide scrollbar for heatmap */
 .heatmap-grid::-webkit-scrollbar { height: 4px; }
-.heatmap-grid::-webkit-scrollbar-thumb { background: rgba(0, 240, 255, 0.2); border-radius: 4px; }
+.heatmap-grid::-webkit-scrollbar-thumb { background: rgba(16, 185, 129, 0.2); border-radius: 4px; }
 
 .heatmap-col {
     display: flex;
@@ -699,7 +697,7 @@ a {
 .btn-download:hover {
     background: #fff;
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(0, 240, 255, 0.4);
+    box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
 }
 
 /* ========================================
