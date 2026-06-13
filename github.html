@@ -63,25 +63,37 @@
                 #native-gh-calendar-wrapper .float-left { float: left; }
                 #native-gh-calendar-wrapper .float-right { float: right; display: flex; align-items: center; gap: 4px; }
                 
-                /* Hide screen reader text */
-                #native-gh-calendar-wrapper .sr-only { display: none; }
+                /* Hide screen reader text and broken GitHub JS elements */
+                #native-gh-calendar-wrapper .sr-only { display: none !important; }
+                #native-gh-calendar-wrapper a[href^="#year-link"] { display: none !important; }
+                #native-gh-calendar-wrapper .js-org-filter-links-container { display: none !important; }
                 
-                /* Create 2-column layout for Activity Overview */
+                /* Restore proper 2-column layout for Activity Overview inner content */
                 #native-gh-calendar-wrapper .activity-overview-box {
-                    display: grid;
-                    grid-template-columns: 1fr 1fr;
-                    gap: 2rem;
-                    align-items: center;
                     border-top: 1px solid var(--border);
                     margin-top: 20px;
                     padding-top: 20px;
                 }
                 
-                /* Make sure SVG stays contained */
-                #native-gh-calendar-wrapper .js-activity-overview-graph-container {
+                #native-gh-calendar-wrapper #user-activity-overview > div {
+                    display: flex !important;
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    gap: 2rem;
+                    justify-content: space-between;
+                    align-items: center;
+                }
+                
+                #native-gh-calendar-wrapper #user-activity-overview > div > div:first-child {
+                    flex: 1;
+                    min-width: 300px;
+                }
+                
+                #native-gh-calendar-wrapper #user-activity-overview > div > div:last-child {
+                    flex: 1;
+                    min-width: 300px;
                     display: flex;
                     justify-content: center;
-                    align-items: center;
                 }
                 #native-gh-calendar-wrapper .ContributionCalendar-day[data-level="0"] { background-color: rgba(16, 185, 129, 0.05); border-radius: 2px; outline: 1px solid rgba(255,255,255,0.05); outline-offset: -1px; }
                 #native-gh-calendar-wrapper .ContributionCalendar-day[data-level="1"] { background-color: #064e3b; border-radius: 2px; outline: 1px solid rgba(255,255,255,0.05); outline-offset: -1px; }
