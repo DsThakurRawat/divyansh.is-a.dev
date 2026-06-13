@@ -69,7 +69,6 @@ const rndProjects = [
         url: 'https://github.com/DsThakurRawat/instance-segmentation-inpainting-system',
     }
 ];
-// Initialize GitHub Calendar
 async function renderNativeGitHubCalendar() {
     const container = document.getElementById('native-gh-calendar');
     if (!container)
@@ -128,8 +127,14 @@ async function renderNativeGitHubCalendar() {
         }, 500);
     }
     catch (e) {
-        console.error('Failed to load native GitHub calendar', e);
-        container.innerHTML = '<div style="color: red; text-align: center;">Failed to load native GitHub calendar.</div>';
+        console.error('Failed to load native GitHub calendar, falling back to ghchart API', e);
+        // Fallback method
+        container.innerHTML = `
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 1rem; width: 100%;">
+                <h4 style="color: var(--text-primary); margin-bottom: 0.5rem; font-weight: 600;">Contribution Heatmap</h4>
+                <img src="https://ghchart.rshah.org/10b981/DsThakurRawat" alt="GitHub Contributions Heatmap" style="width: 100%; max-width: 900px; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));" onerror="this.style.display='none'">
+            </div>
+        `;
     }
 }
 document.addEventListener('DOMContentLoaded', () => {

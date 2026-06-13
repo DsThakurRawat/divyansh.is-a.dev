@@ -99,17 +99,18 @@
             </div>
         </section>
 
-            <div style="display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center; margin-bottom: 3rem; margin-top: 3rem;">
-                <div style="flex: 1; min-width: 300px; display: flex; flex-direction: column; align-items: center; gap: 1rem;">
-                    <h4 style="color: var(--text-secondary); margin-bottom: -0.5rem; font-weight: 500;">Top Languages</h4>
-                    <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=DsThakurRawat&layout=compact&theme=dark&bg_color=141423&hide_border=true&title_color=39d353&text_color=E2E8F0" alt="Top Languages" style="width: 100%; max-width: 400px; border-radius: 8px;">
-                </div>
+        <div class="stats-cards-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
+            <div class="custom-stat-card" style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 1.5rem; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                <h4 style="color: var(--text-primary); margin-bottom: 1rem; font-weight: 600; font-size: 1rem;">Top Languages</h4>
+                <!-- Re-themed to match Emerald (bg: 0F1923, accent: 10B981) -->
+                <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=DsThakurRawat&layout=compact&theme=dark&bg_color=0F1923&hide_border=true&title_color=10B981&icon_color=10B981&text_color=E2E8F0" alt="Top Languages" style="width: 100%; border-radius: 8px; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));" onerror="this.style.display='none'">
             </div>
-
-            <div style="display: flex; flex-direction: column; align-items: center; gap: 1rem; margin-bottom: 4rem;">
-                <h4 style="color: var(--text-secondary); margin-bottom: 0.5rem; font-weight: 500;">GitHub Trophies</h4>
-                <img src="https://github-profile-trophy.vercel.app/?username=DsThakurRawat&theme=darkhub&no-bg=true&no-frame=true&margin-w=15&margin-h=15" alt="GitHub Trophies" style="width: 100%; max-width: 900px;" onerror="this.style.display='none'">
+            
+            <div class="custom-stat-card" style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 1.5rem; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                <h4 style="color: var(--text-primary); margin-bottom: 1rem; font-weight: 600; font-size: 1rem;">GitHub Trophies</h4>
+                <img src="https://github-profile-trophy.vercel.app/?username=DsThakurRawat&theme=darkhub&no-frame=true&no-bg=true&margin-w=15" alt="GitHub Trophies" style="width: 100%; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));" onerror="this.style.display='none'">
             </div>
+        </div>
 
             <h3 class="section-subtitle github-subtitle" style="margin-top: 4rem;">Featured Projects</h3>
             <div class="project-list" id="pinned-repos">
