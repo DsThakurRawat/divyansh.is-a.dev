@@ -101,25 +101,78 @@ async function renderNativeGitHubCalendar() {
             const graph = container.querySelector('.js-activity-overview-graph');
             const containerDiv = container.querySelector('.js-activity-overview-graph-container');
             if (spinner && graph && containerDiv) {
-                spinner.classList.add('d-none');
-                graph.classList.remove('d-none');
+                if (spinner)
+                    spinner.style.display = 'none';
+                if (graph) {
+                    graph.style.display = 'block';
+                    graph.setAttribute('width', '100%');
+                    graph.setAttribute('height', '300');
+                    graph.setAttribute('viewBox', '0 0 300 300');
+                }
                 try {
                     const dataStr = containerDiv.getAttribute('data-percentages');
                     if (dataStr) {
                         const data = JSON.parse(dataStr);
-                        // Apply percentages to SVG labels
-                        const setLabel = (dir, key) => {
+                        // Center and radius
+                        const cx = 150, cy = 150, r = 100;
+                        const pt = (val, angle) => {
+                            const rad = angle * Math.PI / 180;
+                            // Ensure min radius of 10 for visibility even if 0%
+                            const dist = Math.max(10, (val / 100) * r);
+                            return { x: cx + dist * Math.cos(rad), y: cy + dist * Math.sin(rad) };
+                        };
+                        const points = {
+                            top: pt(data['Code review'] || 0, -90),
+                            right: pt(data['Issues'] || 0, 0),
+                            bottom: pt(data['Pull requests'] || 0, 90),
+                            left: pt(data['Commits'] || 0, 180)
+                        };
+                        // Draw Blob
+                        const blob = graph.querySelector('.js-highlight-blob');
+                        if (blob) {
+                            blob.setAttribute('d', `M${points.top.x},${points.top.y} L${points.right.x},${points.right.y} L${points.bottom.x},${points.bottom.y} L${points.left.x},${points.left.y} Z`);
+                            blob.setAttribute('fill', 'var(--accent-cyan)');
+                            blob.setAttribute('stroke', 'var(--accent-cyan)');
+                        }
+                        // Set Axes
+                        const xAxis = graph.querySelector('.js-highlight-x-axis');
+                        if (xAxis) {
+                            xAxis.setAttribute('x1', '30');
+                            xAxis.setAttribute('y1', '150');
+                            xAxis.setAttribute('x2', '270');
+                            xAxis.setAttribute('y2', '150');
+                        }
+                        const yAxis = graph.querySelector('.js-highlight-y-axis');
+                        if (yAxis) {
+                            yAxis.setAttribute('x1', '150');
+                            yAxis.setAttribute('y1', '30');
+                            yAxis.setAttribute('x2', '150');
+                            yAxis.setAttribute('y2', '270');
+                        }
+                        // Apply points and labels
+                        const setLabel = (dir, key, px, py, align) => {
+                            const ellipse = graph.querySelector(`.js-highlight-${dir}-ellipse`);
+                            if (ellipse) {
+                                ellipse.setAttribute('cx', px.toString());
+                                ellipse.setAttribute('cy', py.toString());
+                            }
                             const percentEl = graph.querySelector(`.js-highlight-percent-${dir}`);
                             const labelEl = graph.querySelector(`.js-highlight-label-${dir}`);
                             if (percentEl && labelEl && data[key] !== undefined) {
                                 percentEl.textContent = `${data[key]}%`;
                                 labelEl.textContent = key;
+                                percentEl.setAttribute('x', align === 'start' ? (px + 10).toString() : align === 'end' ? (px - 10).toString() : px.toString());
+                                percentEl.setAttribute('y', dir === 'top' ? (py - 25).toString() : dir === 'bottom' ? (py + 20).toString() : (py - 5).toString());
+                                percentEl.setAttribute('text-anchor', align);
+                                labelEl.setAttribute('x', align === 'start' ? (px + 10).toString() : align === 'end' ? (px - 10).toString() : px.toString());
+                                labelEl.setAttribute('y', dir === 'top' ? (py - 10).toString() : dir === 'bottom' ? (py + 35).toString() : (py + 10).toString());
+                                labelEl.setAttribute('text-anchor', align);
                             }
                         };
-                        setLabel('top', 'Code review');
-                        setLabel('right', 'Issues');
-                        setLabel('bottom', 'Pull requests');
-                        setLabel('left', 'Commits');
+                        setLabel('top', 'Code review', points.top.x, points.top.y, 'middle');
+                        setLabel('right', 'Issues', points.right.x, points.right.y, 'start');
+                        setLabel('bottom', 'Pull requests', points.bottom.x, points.bottom.y, 'middle');
+                        setLabel('left', 'Commits', points.left.x, points.left.y, 'end');
                     }
                 }
                 catch (e) { }
