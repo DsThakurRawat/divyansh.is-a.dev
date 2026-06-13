@@ -91,7 +91,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
     renderCards('pinned-repos', pinnedRepos);
-    renderCards('home-pinned-repos', pinnedRepos.slice(0, 2));
     renderCards('rnd-repos', rndProjects);
     // 4. Render Native LeetCode Dashboard
     renderLeetCodeDashboard();
@@ -142,8 +141,8 @@ async function fetchPopularRepos() {
                 <p class="project-desc">${repo.desc}</p>
                 <div class="project-tags">
                     ${repo.tags.map((tag) => `<span class="project-tag">${tag}</span>`).join('')}
-                    <span class="project-tag" style="background: rgba(16, 185, 129, 0.1); color: var(--accent-cyan); border-color: rgba(16, 185, 129, 0.2);"><i class="fas fa-star" style="font-size: 0.8em; margin-right: 4px;"></i>${repo.stars}</span>
-                    <span class="project-tag" style="background: rgba(16, 185, 129, 0.1); color: var(--accent-cyan); border-color: rgba(16, 185, 129, 0.2);"><i class="fas fa-code-branch" style="font-size: 0.8em; margin-right: 4px;"></i>${repo.forks}</span>
+                    <span class="project-tag" style="background: rgba(0, 240, 255, 0.1); color: var(--accent-cyan); border-color: rgba(0, 240, 255, 0.2);"><i class="fas fa-star" style="font-size: 0.8em; margin-right: 4px;"></i>${repo.stars}</span>
+                    <span class="project-tag" style="background: rgba(0, 240, 255, 0.1); color: var(--accent-cyan); border-color: rgba(0, 240, 255, 0.2);"><i class="fas fa-code-branch" style="font-size: 0.8em; margin-right: 4px;"></i>${repo.forks}</span>
                 </div>
                 <div class="project-links">
                     <a href="${repo.url}" target="_blank" aria-label="GitHub Repository"><i class="fab fa-github"></i> View code</a>
@@ -387,7 +386,6 @@ async function renderCodeforcesHeatmap() {
         container.innerHTML = `<div style="color: var(--text-secondary); text-align: center;">Unable to load Codeforces heatmap: ${error.message}</div>`;
     }
 }
-// Function to render native LeetCode dashboard
 async function renderLeetCodeDashboard() {
     var _a, _b;
     if (!document.getElementById('lc-native-dashboard'))
@@ -403,20 +401,38 @@ async function renderLeetCodeDashboard() {
             data = JSON.parse(cachedData);
         }
         else {
-            const [profileRes, solvedRes, contestRes, calendarRes] = await Promise.all([
-                fetch(`https://alfa-leetcode-api.onrender.com/${handle}`),
-                fetch(`https://alfa-leetcode-api.onrender.com/${handle}/solved`),
-                fetch(`https://alfa-leetcode-api.onrender.com/${handle}/contest`),
-                fetch(`https://alfa-leetcode-api.onrender.com/${handle}/calendar`)
+            // Helper function to try multiple API methods for a specific endpoint
+            const fetchWithFallback = async (endpoint) => {
+                const methods = [
+                    // Method 1: Local Serverless Proxy (Most reliable, no IP rate limits)
+                    `/api/lc-proxy?handle=${handle}&endpoint=${endpoint}`,
+                    // Method 2: Public Alfa LeetCode API (Render)
+                    `https://alfa-leetcode-api.onrender.com/${handle}${endpoint === 'profile' ? '' : '/' + endpoint}`
+                ];
+                for (const url of methods) {
+                    try {
+                        const res = await fetch(url);
+                        if (res.ok) {
+                            return await res.json();
+                        }
+                    }
+                    catch (e) {
+                        console.warn(`Failed fetching from ${url}, trying next method...`);
+                    }
+                }
+                throw new Error(`All methods failed for endpoint: ${endpoint}`);
+            };
+            const [profileData, solvedData, contestData, calendarData] = await Promise.all([
+                fetchWithFallback('profile'),
+                fetchWithFallback('solved'),
+                fetchWithFallback('contest'),
+                fetchWithFallback('calendar')
             ]);
-            if (!profileRes.ok || !solvedRes.ok || !contestRes.ok || !calendarRes.ok) {
-                throw new Error("One or more LeetCode API endpoints failed to load.");
-            }
             data = {
-                profile: await profileRes.json(),
-                solved: await solvedRes.json(),
-                contest: await contestRes.json(),
-                calendar: await calendarRes.json()
+                profile: profileData,
+                solved: solvedData,
+                contest: contestData,
+                calendar: calendarData
             };
             localStorage.setItem(CACHE_KEY, JSON.stringify(data));
             localStorage.setItem(CACHE_TIME_KEY, Date.now().toString());

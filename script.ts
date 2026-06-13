@@ -412,7 +412,6 @@ async function renderCodeforcesHeatmap() {
     }
 }
 
-// Function to render native LeetCode dashboard
 async function renderLeetCodeDashboard() {
     if (!document.getElementById('lc-native-dashboard')) return;
     const handle = 'DsThakurRawat';
@@ -428,22 +427,40 @@ async function renderLeetCodeDashboard() {
         if (cachedData && cacheTime && (Date.now() - parseInt(cacheTime) < 3600000)) {
             data = JSON.parse(cachedData);
         } else {
-            const [profileRes, solvedRes, contestRes, calendarRes] = await Promise.all([
-                fetch(`https://alfa-leetcode-api.onrender.com/${handle}`),
-                fetch(`https://alfa-leetcode-api.onrender.com/${handle}/solved`),
-                fetch(`https://alfa-leetcode-api.onrender.com/${handle}/contest`),
-                fetch(`https://alfa-leetcode-api.onrender.com/${handle}/calendar`)
+            // Helper function to try multiple API methods for a specific endpoint
+            const fetchWithFallback = async (endpoint: string) => {
+                const methods = [
+                    // Method 1: Local Serverless Proxy (Most reliable, no IP rate limits)
+                    `/api/lc-proxy?handle=${handle}&endpoint=${endpoint}`,
+                    // Method 2: Public Alfa LeetCode API (Render)
+                    `https://alfa-leetcode-api.onrender.com/${handle}${endpoint === 'profile' ? '' : '/' + endpoint}`
+                ];
+
+                for (const url of methods) {
+                    try {
+                        const res = await fetch(url);
+                        if (res.ok) {
+                            return await res.json();
+                        }
+                    } catch (e) {
+                        console.warn(`Failed fetching from ${url}, trying next method...`);
+                    }
+                }
+                throw new Error(`All methods failed for endpoint: ${endpoint}`);
+            };
+
+            const [profileData, solvedData, contestData, calendarData] = await Promise.all([
+                fetchWithFallback('profile'),
+                fetchWithFallback('solved'),
+                fetchWithFallback('contest'),
+                fetchWithFallback('calendar')
             ]);
 
-            if(!profileRes.ok || !solvedRes.ok || !contestRes.ok || !calendarRes.ok) {
-                throw new Error("One or more LeetCode API endpoints failed to load.");
-            }
-
             data = {
-                profile: await profileRes.json(),
-                solved: await solvedRes.json(),
-                contest: await contestRes.json(),
-                calendar: await calendarRes.json()
+                profile: profileData,
+                solved: solvedData,
+                contest: contestData,
+                calendar: calendarData
             };
             
             localStorage.setItem(CACHE_KEY, JSON.stringify(data));
