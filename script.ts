@@ -78,7 +78,68 @@ const rndProjects: Repo[] = [
 ];
 
 // Initialize GitHub Calendar
-// GitHubCalendar removed
+async function renderNativeGitHubCalendar() {
+    const container = document.getElementById('native-gh-calendar');
+    if (!container) return;
+    
+    try {
+        const handle = 'DsThakurRawat';
+        // Check cache first
+        const CACHE_KEY = 'gh_calendar_html';
+        const CACHE_TIME_KEY = 'gh_calendar_time';
+        const cacheTime = localStorage.getItem(CACHE_TIME_KEY);
+        const cachedData = localStorage.getItem(CACHE_KEY);
+
+        let html = '';
+        if (cachedData && cacheTime && (Date.now() - parseInt(cacheTime) < 3600000)) {
+            html = cachedData;
+        } else {
+            const res = await fetch(`/api/gh-calendar?handle=${handle}`);
+            if (!res.ok) throw new Error("Proxy failed");
+            html = await res.text();
+            localStorage.setItem(CACHE_KEY, html);
+            localStorage.setItem(CACHE_TIME_KEY, Date.now().toString());
+        }
+
+        // Inject the HTML
+        container.innerHTML = html;
+
+        // Animate the Activity Overview (crosshair graph) since GitHub JS is not loaded
+        setTimeout(() => {
+            const spinner = container.querySelector('.js-activity-overview-graph-spinner');
+            const graph = container.querySelector('.js-activity-overview-graph');
+            const containerDiv = container.querySelector('.js-activity-overview-graph-container');
+            if (spinner && graph && containerDiv) {
+                spinner.classList.add('d-none');
+                graph.classList.remove('d-none');
+                
+                try {
+                    const dataStr = containerDiv.getAttribute('data-percentages');
+                    if (dataStr) {
+                        const data = JSON.parse(dataStr);
+                        // Apply percentages to SVG labels
+                        const setLabel = (dir: string, key: string) => {
+                            const percentEl = graph.querySelector(`.js-highlight-percent-${dir}`);
+                            const labelEl = graph.querySelector(`.js-highlight-label-${dir}`);
+                            if (percentEl && labelEl && data[key] !== undefined) {
+                                percentEl.textContent = `${data[key]}%`;
+                                labelEl.textContent = key;
+                            }
+                        };
+                        setLabel('top', 'Code review');
+                        setLabel('right', 'Issues');
+                        setLabel('bottom', 'Pull requests');
+                        setLabel('left', 'Commits');
+                    }
+                } catch(e) {}
+            }
+        }, 500);
+
+    } catch (e) {
+        console.error('Failed to load native GitHub calendar', e);
+        container.innerHTML = '<div style="color: red; text-align: center;">Failed to load native GitHub calendar.</div>';
+    }
+}
 
 document.addEventListener('DOMContentLoaded', () => {
     // 1. Render Pinned Repositories
@@ -113,6 +174,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 5. Fetch Popular Repos
     fetchPopularRepos();
+
+    // 6. Native GH Calendar
+    renderNativeGitHubCalendar();
 });
 
 async function fetchPopularRepos() {
