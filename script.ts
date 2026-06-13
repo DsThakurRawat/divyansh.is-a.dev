@@ -113,9 +113,9 @@ async function renderNativeGitHubCalendar() {
                 if (spinner) (spinner as HTMLElement).style.display = 'none';
                 if (graph) {
                     (graph as HTMLElement).style.display = 'block';
-                    graph.setAttribute('width', '100%');
-                    graph.setAttribute('height', '300');
-                    graph.setAttribute('viewBox', '0 0 300 300');
+                    graph.setAttribute('width', '250');
+                    graph.setAttribute('height', '250');
+                    graph.setAttribute('viewBox', '0 0 250 250');
                 }
                 
                 try {
@@ -123,12 +123,12 @@ async function renderNativeGitHubCalendar() {
                     if (dataStr) {
                         const data = JSON.parse(dataStr);
                         
-                        // Center and radius
-                        const cx = 150, cy = 150, r = 100;
+                        // Center and radius for smaller 250x250 graph
+                        const cx = 125, cy = 125, r = 70;
                         const pt = (val: number, angle: number) => {
                             const rad = angle * Math.PI / 180;
-                            // Ensure min radius of 10 for visibility even if 0%
-                            const dist = Math.max(10, (val / 100) * r);
+                            // Ensure min radius of 5 for visibility even if 0%
+                            const dist = Math.max(5, (val / 100) * r);
                             return { x: cx + dist * Math.cos(rad), y: cy + dist * Math.sin(rad) };
                         };
 
@@ -147,11 +147,11 @@ async function renderNativeGitHubCalendar() {
                             blob.setAttribute('stroke', 'var(--accent-cyan)');
                         }
 
-                        // Set Axes
+                        // Set Axes - perfectly matching label boundaries
                         const xAxis = graph.querySelector('.js-highlight-x-axis');
-                        if (xAxis) { xAxis.setAttribute('x1', '30'); xAxis.setAttribute('y1', '150'); xAxis.setAttribute('x2', '270'); xAxis.setAttribute('y2', '150'); }
+                        if (xAxis) { xAxis.setAttribute('x1', '40'); xAxis.setAttribute('y1', '125'); xAxis.setAttribute('x2', '210'); xAxis.setAttribute('y2', '125'); }
                         const yAxis = graph.querySelector('.js-highlight-y-axis');
-                        if (yAxis) { yAxis.setAttribute('x1', '150'); yAxis.setAttribute('y1', '30'); yAxis.setAttribute('x2', '150'); yAxis.setAttribute('y2', '270'); }
+                        if (yAxis) { yAxis.setAttribute('x1', '125'); yAxis.setAttribute('y1', '40'); yAxis.setAttribute('x2', '125'); yAxis.setAttribute('y2', '210'); }
 
                         // Apply points and labels
                         const setLabel = (dir: string, key: string, px: number, py: number, align: string) => {
@@ -165,12 +165,12 @@ async function renderNativeGitHubCalendar() {
                                 percentEl.textContent = `${data[key]}%`;
                                 labelEl.textContent = key;
                                 
-                                percentEl.setAttribute('x', align === 'start' ? (px+10).toString() : align === 'end' ? (px-10).toString() : px.toString());
-                                percentEl.setAttribute('y', dir === 'top' ? (py-25).toString() : dir === 'bottom' ? (py+20).toString() : (py-5).toString());
+                                percentEl.setAttribute('x', align === 'start' ? (px+8).toString() : align === 'end' ? (px-8).toString() : px.toString());
+                                percentEl.setAttribute('y', dir === 'top' ? (py-20).toString() : dir === 'bottom' ? (py+18).toString() : (py-4).toString());
                                 percentEl.setAttribute('text-anchor', align);
                                 
-                                labelEl.setAttribute('x', align === 'start' ? (px+10).toString() : align === 'end' ? (px-10).toString() : px.toString());
-                                labelEl.setAttribute('y', dir === 'top' ? (py-10).toString() : dir === 'bottom' ? (py+35).toString() : (py+10).toString());
+                                labelEl.setAttribute('x', align === 'start' ? (px+8).toString() : align === 'end' ? (px-8).toString() : px.toString());
+                                labelEl.setAttribute('y', dir === 'top' ? (py-8).toString() : dir === 'bottom' ? (py+30).toString() : (py+10).toString());
                                 labelEl.setAttribute('text-anchor', align);
                             }
                         };
