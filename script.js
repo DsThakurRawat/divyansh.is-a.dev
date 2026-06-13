@@ -86,7 +86,8 @@ async function renderNativeGitHubCalendar() {
             html = cachedData;
         }
         else {
-            const res = await fetch(`/api/gh-calendar?handle=${handle}`);
+            // Using absolute URL so it works during local development as well
+            const res = await fetch(`https://divyansh.is-a.dev/api/gh-calendar?handle=${handle}`);
             if (!res.ok)
                 throw new Error("Proxy failed");
             html = await res.text();

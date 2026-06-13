@@ -42,31 +42,28 @@
             <!-- GitHub Native Contributions Calendar -->
         <section class="github-stats">
             <h2 class="section-title"><i class="fa-brands fa-github"></i> Contribution Activity</h2>
-            <!-- Primer CSS for native GitHub styling -->
-            <link href="https://unpkg.com/@primer/css@21.0.7/dist/primer.css" rel="stylesheet" />
             <style>
-                /* Scope Primer CSS and fix conflicts */
+                /* Custom styles for native GitHub calendar without importing Primer globally */
                 #native-gh-calendar-wrapper {
-                    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
-                    background-color: #000000; /* Pure black theme requested */
-                    color: #c9d1d9;
-                    border: 1px solid #222222;
-                    border-radius: 6px;
+                    background-color: transparent; /* Match site theme */
+                    color: var(--text-primary);
+                    border: 1px solid var(--border);
+                    border-radius: var(--radius-md);
                     padding: 20px;
                     margin-top: 20px;
                     overflow: hidden;
                 }
                 #native-gh-calendar-wrapper h2 {
                     font-size: 16px;
-                    font-weight: 400;
+                    font-weight: 600;
                     margin-bottom: 8px;
-                    color: #c9d1d9;
+                    color: var(--text-primary);
                 }
-                #native-gh-calendar-wrapper .ContributionCalendar-day[data-level="0"] { fill: #161b22; outline: 1px solid rgba(255,255,255,0.05); outline-offset: -1px; }
-                #native-gh-calendar-wrapper .ContributionCalendar-day[data-level="1"] { fill: #0e4429; outline: 1px solid rgba(255,255,255,0.05); outline-offset: -1px; }
-                #native-gh-calendar-wrapper .ContributionCalendar-day[data-level="2"] { fill: #006d32; outline: 1px solid rgba(255,255,255,0.05); outline-offset: -1px; }
-                #native-gh-calendar-wrapper .ContributionCalendar-day[data-level="3"] { fill: #26a641; outline: 1px solid rgba(255,255,255,0.05); outline-offset: -1px; }
-                #native-gh-calendar-wrapper .ContributionCalendar-day[data-level="4"] { fill: #39d353; outline: 1px solid rgba(255,255,255,0.05); outline-offset: -1px; }
+                #native-gh-calendar-wrapper .ContributionCalendar-day[data-level="0"] { background-color: rgba(16, 185, 129, 0.05); border-radius: 2px; outline: 1px solid rgba(255,255,255,0.05); outline-offset: -1px; }
+                #native-gh-calendar-wrapper .ContributionCalendar-day[data-level="1"] { background-color: #064e3b; border-radius: 2px; outline: 1px solid rgba(255,255,255,0.05); outline-offset: -1px; }
+                #native-gh-calendar-wrapper .ContributionCalendar-day[data-level="2"] { background-color: #047857; border-radius: 2px; outline: 1px solid rgba(255,255,255,0.05); outline-offset: -1px; }
+                #native-gh-calendar-wrapper .ContributionCalendar-day[data-level="3"] { background-color: #059669; border-radius: 2px; outline: 1px solid rgba(255,255,255,0.05); outline-offset: -1px; }
+                #native-gh-calendar-wrapper .ContributionCalendar-day[data-level="4"] { background-color: var(--accent-cyan); border-radius: 2px; outline: 1px solid rgba(255,255,255,0.05); outline-offset: -1px; }
                 
                 #native-gh-calendar-wrapper .ContributionCalendar-label {
                     font-size: 12px;
