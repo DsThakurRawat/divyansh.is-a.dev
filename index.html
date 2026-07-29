@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,7 +11,7 @@
     <meta property="og:url" content="https://divyansh.is-a.dev">
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://divyansh.is-a.dev/assets/pfp.jpeg?v=3">
-    <meta name="theme-color" content="#fbfbf8">
+    <meta name="theme-color" content="#0e0e10">
     <link rel="icon" type="image/jpeg" href="assets/pfp.jpeg?v=3">
 
     <!-- Prevent theme flash: set theme before paint -->
@@ -19,7 +19,7 @@
         (function () {
             try {
                 var saved = localStorage.getItem('theme');
-                document.documentElement.setAttribute('data-theme', saved || 'light');
+                document.documentElement.setAttribute('data-theme', saved || 'dark');
             } catch (e) {}
         })();
     </script>
@@ -27,7 +27,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=3">
+    <link rel="stylesheet" href="styles.css?v=4">
 </head>
 <body>
     <!-- Top bar -->
@@ -208,60 +208,85 @@
         <!-- Competitive Programming -->
         <section id="cp" class="section">
             <h2 class="section-title">Competitive Programming</h2>
-            <div class="stat-row" id="stat-row">
-                <a class="stat" href="https://leetcode.com/u/DsThakurRawat/" target="_blank" rel="noopener">
-                    <span class="stat-label">LeetCode · Solved</span>
-                    <span class="stat-value" id="lc-solved">—</span>
-                    <span class="stat-sub" id="lc-breakdown">View profile ↗</span>
-                </a>
-                <a class="stat" href="https://leetcode.com/u/DsThakurRawat/" target="_blank" rel="noopener">
-                    <span class="stat-label">LeetCode · Contest</span>
-                    <span class="stat-value" id="lc-contest">—</span>
-                    <span class="stat-sub" id="lc-contest-sub">View profile ↗</span>
-                </a>
-                <a class="stat" href="https://codeforces.com/profile/lost_boy21" target="_blank" rel="noopener">
-                    <span class="stat-label">Codeforces · Rating</span>
-                    <span class="stat-value" id="cf-rating">—</span>
-                    <span class="stat-sub" id="cf-rank">View profile ↗</span>
-                </a>
-                <a class="stat" href="https://codeforces.com/profile/lost_boy21" target="_blank" rel="noopener">
-                    <span class="stat-label">Codeforces · Solved</span>
-                    <span class="stat-value" id="cf-solved">—</span>
-                    <span class="stat-sub" id="cf-solved-sub">View profile ↗</span>
-                </a>
-            </div>
+            <!-- One block per platform: identical layout, so the same metric
+                 sits in the same place on both and they read comparably. -->
+            <article class="cp-card" data-scheme="lc">
+                <header class="cp-head">
+                    <img class="cp-logo" src="assets/leet.png" alt="" width="28" height="28" loading="lazy">
+                    <div class="cp-id">
+                        <a class="cp-name" href="https://leetcode.com/u/DsThakurRawat/" target="_blank" rel="noopener">LeetCode</a>
+                        <span class="cp-handle">@DsThakurRawat</span>
+                    </div>
+                    <a class="cp-link" href="https://leetcode.com/u/DsThakurRawat/" target="_blank" rel="noopener">Profile ↗</a>
+                </header>
 
-            <h3 class="sub-label">LeetCode Activity</h3>
-            <figure class="hm-card" data-scheme="lc">
-                <div class="hm-head">
-                    <a class="hm-title" href="https://leetcode.com/u/DsThakurRawat/" target="_blank" rel="noopener">LeetCode · @DsThakurRawat</a>
-                    <span class="hm-count" id="lc-count">—</span>
+                <div class="cp-metrics">
+                    <div class="cp-metric">
+                        <span class="cp-metric-label">Questions solved</span>
+                        <span class="cp-metric-value" id="lc-solved">—</span>
+                        <span class="cp-metric-sub" id="lc-breakdown">&nbsp;</span>
+                    </div>
+                    <div class="cp-metric">
+                        <span class="cp-metric-label">Contest rating</span>
+                        <span class="cp-metric-value" id="lc-contest">—</span>
+                        <span class="cp-metric-sub" id="lc-contest-sub">&nbsp;</span>
+                    </div>
                 </div>
-                <div class="hm-scroll">
-                    <div class="hm-months" id="lc-months" aria-hidden="true"></div>
-                    <div class="hm-grid" id="lc-grid" role="img" aria-label="LeetCode submission heatmap for the last 12 months"></div>
-                </div>
-                <figcaption class="hm-foot">
-                    <span class="hm-note" id="lc-note"></span>
-                    <span class="hm-legend" aria-hidden="true">Less<i data-l="0"></i><i data-l="1"></i><i data-l="2"></i><i data-l="3"></i><i data-l="4"></i>More</span>
-                </figcaption>
-            </figure>
 
-            <h3 class="sub-label">Codeforces Activity</h3>
-            <figure class="hm-card" data-scheme="cf">
-                <div class="hm-head">
-                    <a class="hm-title" href="https://codeforces.com/profile/lost_boy21" target="_blank" rel="noopener">Codeforces · @lost_boy21</a>
-                    <span class="hm-count" id="cf-count">—</span>
+                <div class="cp-activity">
+                    <div class="hm-head">
+                        <span class="hm-title">Submission activity</span>
+                        <span class="hm-count" id="lc-count">—</span>
+                    </div>
+                    <div class="hm-scroll">
+                        <div class="hm-months" id="lc-months" aria-hidden="true"></div>
+                        <div class="hm-grid" id="lc-grid" role="img" aria-label="LeetCode submission heatmap for the last 12 months"></div>
+                    </div>
+                    <div class="hm-foot">
+                        <span class="hm-note" id="lc-note"></span>
+                        <span class="hm-legend" aria-hidden="true">Less<i data-l="0"></i><i data-l="1"></i><i data-l="2"></i><i data-l="3"></i><i data-l="4"></i>More</span>
+                    </div>
                 </div>
-                <div class="hm-scroll">
-                    <div class="hm-months" id="cf-months" aria-hidden="true"></div>
-                    <div class="hm-grid" id="cf-grid" role="img" aria-label="Codeforces submission heatmap for the last 12 months"></div>
+            </article>
+
+            <article class="cp-card" data-scheme="cf">
+                <header class="cp-head">
+                    <img class="cp-logo" src="assets/cf-icon.webp" alt="" width="28" height="28" loading="lazy">
+                    <div class="cp-id">
+                        <a class="cp-name" href="https://codeforces.com/profile/lost_boy21" target="_blank" rel="noopener">Codeforces</a>
+                        <span class="cp-handle">@lost_boy21</span>
+                    </div>
+                    <a class="cp-link" href="https://codeforces.com/profile/lost_boy21" target="_blank" rel="noopener">Profile ↗</a>
+                </header>
+
+                <div class="cp-metrics">
+                    <div class="cp-metric">
+                        <span class="cp-metric-label">Questions solved</span>
+                        <span class="cp-metric-value" id="cf-solved">—</span>
+                        <span class="cp-metric-sub" id="cf-solved-sub">&nbsp;</span>
+                    </div>
+                    <div class="cp-metric">
+                        <span class="cp-metric-label">Rating</span>
+                        <span class="cp-metric-value" id="cf-rating">—</span>
+                        <span class="cp-metric-sub" id="cf-rank">&nbsp;</span>
+                    </div>
                 </div>
-                <figcaption class="hm-foot">
-                    <span class="hm-note" id="cf-note"></span>
-                    <span class="hm-legend" aria-hidden="true">Less<i data-l="0"></i><i data-l="1"></i><i data-l="2"></i><i data-l="3"></i><i data-l="4"></i>More</span>
-                </figcaption>
-            </figure>
+
+                <div class="cp-activity">
+                    <div class="hm-head">
+                        <span class="hm-title">Submission activity</span>
+                        <span class="hm-count" id="cf-count">—</span>
+                    </div>
+                    <div class="hm-scroll">
+                        <div class="hm-months" id="cf-months" aria-hidden="true"></div>
+                        <div class="hm-grid" id="cf-grid" role="img" aria-label="Codeforces submission heatmap for the last 12 months"></div>
+                    </div>
+                    <div class="hm-foot">
+                        <span class="hm-note" id="cf-note"></span>
+                        <span class="hm-legend" aria-hidden="true">Less<i data-l="0"></i><i data-l="1"></i><i data-l="2"></i><i data-l="3"></i><i data-l="4"></i>More</span>
+                    </div>
+                </div>
+            </article>
         </section>
 
     </main>
@@ -270,6 +295,6 @@
         <p>© 2026 Divyansh Rawat · Built with care.</p>
     </footer>
 
-    <script src="main.js?v=3"></script>
+    <script src="main.js?v=5"></script>
 </body>
 </html>

@@ -78,6 +78,15 @@
         });
     }
 
+    // These are free third-party endpoints; a single transient failure should
+    // not blank a card. Retry once after a short pause before giving up.
+    function getJSONRetry(url, delayMs) {
+        return getJSON(url).catch(function () {
+            return new Promise(function (res) { setTimeout(res, delayMs || 1500); })
+                .then(function () { return getJSON(url); });
+        });
+    }
+
     /* ---------- Heatmap rendering ---------- */
     var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
                   'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -191,7 +200,7 @@
 
     /* ---------- GitHub ---------- */
     function loadGitHub() {
-        return getJSON('https://github-contributions-api.jogruber.de/v4/' + GH_USER + '?y=last')
+        return getJSONRetry('https://github-contributions-api.jogruber.de/v4/' + GH_USER + '?y=last')
             .then(function (d) {
                 var list = d && d.contributions;
                 if (!list || !list.length) throw new Error('empty');
@@ -259,17 +268,28 @@
        Codeforces rate-limits to roughly one call every two seconds and answers
        violations with HTTP 200 + {"status":"FAILED"}. So: check status, and run
        the two calls in sequence rather than firing both at once. */
-    function cfGet(path) {
-        return getJSON('https://codeforces.com/api/' + path).then(function (d) {
-            if (!d || d.status !== 'OK' || !d.result) {
-                throw new Error(d && d.comment ? d.comment : 'CF request failed');
-            }
-            return d.result;
+    function cfUnwrap(d) {
+        if (!d || d.status !== 'OK' || !d.result) {
+            throw new Error(d && d.comment ? d.comment : 'CF request failed');
+        }
+        return d.result;
+    }
+
+    // Two independent routes to the same data: straight to codeforces.com,
+    // then through our own proxy (different source IP, cached response) if that
+    // fails. Either one alone drops out often enough to blank the card.
+    function cfGet(endpoint, query) {
+        var direct = 'https://codeforces.com/api/' + endpoint + (query ? '?' + query : '');
+        var viaProxy = '/api/cf-proxy?endpoint=' + encodeURIComponent(endpoint) + (query ? '&' + query : '');
+        return getJSON(direct).then(cfUnwrap).catch(function () {
+            return new Promise(function (res) { setTimeout(res, 1200); })
+                .then(function () { return getJSON(viaProxy); })
+                .then(cfUnwrap);
         });
     }
 
     function loadCodeforces() {
-        return cfGet('user.info?handles=' + CF_USER)
+        return cfGet('user.info', 'handles=' + CF_USER)
             .then(function (result) {
                 var u = result[0];
                 if (u) {
@@ -283,7 +303,7 @@
                 return new Promise(function (res) { setTimeout(res, 2100); });
             })
             .then(function () {
-                return cfGet('user.status?handle=' + CF_USER + '&from=1&count=4000');
+                return cfGet('user.status', 'handle=' + CF_USER + '&from=1&count=4000');
             })
             .then(function (subs) {
                 var counts = {};

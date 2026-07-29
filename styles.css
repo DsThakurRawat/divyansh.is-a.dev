@@ -397,23 +397,81 @@ strong { color: var(--text); font-weight: 600; }
 .more { margin: 1.4rem 0 0; }
 .more a { font-size: .88rem; font-weight: 500; }
 
-/* ---------- Stat row (CP) ---------- */
-.stat-row {
+/* ---------- Platform cards (CP) ----------
+   Same skeleton for both platforms — logo, two metrics, heatmap — so the
+   equivalent number always sits in the equivalent slot and they compare
+   at a glance. Accent is per-platform via --cp-accent. */
+.cp-card {
+    margin-bottom: 1.5rem;
+    padding: 1.3rem 1.4rem 1.4rem;
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--cp-accent);
+    border-radius: 12px;
+    background: var(--surface);
+    box-shadow: var(--shadow);
+    transition: border-color .25s var(--ease);
+}
+.cp-card:last-child { margin-bottom: 0; }
+.cp-card[data-scheme="lc"] { --cp-accent: #ffa116; }
+.cp-card[data-scheme="cf"] { --cp-accent: #1f8dd6; }
+
+.cp-head {
+    display: flex;
+    align-items: center;
+    gap: .7rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-soft);
+}
+.cp-logo { border-radius: 6px; flex-shrink: 0; object-fit: contain; }
+.cp-id { display: flex; flex-direction: column; min-width: 0; }
+.cp-name {
+    font-weight: 600;
+    color: var(--text);
+    text-decoration: none;
+    line-height: 1.25;
+}
+.cp-name:hover { color: var(--cp-accent); }
+.cp-handle { font-family: var(--mono); font-size: .72rem; color: var(--faint); }
+.cp-link {
+    margin-left: auto;
+    font-size: .78rem;
+    color: var(--muted);
+    text-decoration: none;
+    white-space: nowrap;
+}
+.cp-link:hover { color: var(--cp-accent); }
+
+.cp-metrics {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
+    padding: 1.1rem 0;
 }
-.stat {
-    display: flex;
-    flex-direction: column;
-    gap: .25rem;
-    padding: 1.2rem 1.3rem;
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    background: var(--surface);
-    transition: border-color .25s var(--ease), transform .25s var(--ease);
+.cp-metric { display: flex; flex-direction: column; gap: .15rem; min-width: 0; }
+.cp-metric-label {
+    font-family: var(--mono);
+    font-size: .68rem;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--faint);
 }
-.stat:hover { border-color: var(--accent); transform: translateY(-2px); }
+.cp-metric-value {
+    font-family: var(--serif);
+    font-size: 2rem;
+    line-height: 1.1;
+    font-weight: 500;
+    color: var(--text);
+}
+.cp-metric-sub { font-size: .78rem; color: var(--muted); }
+
+.cp-activity { padding-top: .3rem; }
+.cp-activity .hm-head { margin-bottom: .7rem; }
+
+@media (max-width: 560px) {
+    .cp-metric-value { font-size: 1.6rem; }
+}
+
+/* ---------- Stat row (legacy, unused) ---------- */
 .stat-label {
     font-family: var(--mono);
     font-size: .72rem;
@@ -431,13 +489,9 @@ strong { color: var(--text); font-weight: 600; }
 .stat-sub { font-size: .8rem; color: var(--muted); }
 
 /* ---------- Activity heatmaps ---------- */
-.hm-card {
-    margin: 0 0 1.5rem;
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 1.1rem 1.2rem;
-    background: var(--surface);
-
+/* Cell ramps live on any heatmap host (.hm-card or .cp-card); the scheme
+   overrides key off data-scheme alone so both hosts pick them up. */
+.hm-card, .cp-card {
     /* default scheme (GitHub green) */
     --hm-0: var(--tag-bg);
     --hm-1: #9be9a8;
@@ -445,19 +499,28 @@ strong { color: var(--text); font-weight: 600; }
     --hm-3: #30a14e;
     --hm-4: #216e39;
 }
-.hm-card[data-scheme="lc"] {
+[data-scheme="lc"] {
     --hm-1: #ffd9a0;
     --hm-2: #ffa116;
     --hm-3: #e08600;
     --hm-4: #a75f00;
 }
-.hm-card[data-scheme="cf"] {
+[data-scheme="cf"] {
     --hm-1: #a8c7fb;
     --hm-2: #5b8def;
     --hm-3: #3563cc;
     --hm-4: #1f3f92;
 }
-html[data-theme="dark"] .hm-card { --hm-0: #1f1f26; }
+html[data-theme="dark"] .hm-card,
+html[data-theme="dark"] .cp-card { --hm-0: #1f1f26; }
+
+.hm-card {
+    margin: 0 0 1.5rem;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.1rem 1.2rem;
+    background: var(--surface);
+}
 
 .hm-head {
     display: flex;

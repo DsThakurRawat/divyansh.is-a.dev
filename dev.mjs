@@ -3,6 +3,7 @@ import cors from 'cors';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 
+import cfProxy from './api/cf-proxy.js';
 import lcProxy from './api/lc-proxy.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -12,6 +13,15 @@ const app = express();
 app.use(cors());
 
 app.use(express.static(__dirname));
+
+app.get('/api/cf-proxy', async (req, res) => {
+    try {
+        await cfProxy(req, res);
+    } catch (e) {
+        console.error(e);
+        if (!res.headersSent) res.status(500).json({ error: e.message });
+    }
+});
 
 app.get('/api/lc-proxy', async (req, res) => {
     try {
