@@ -27,7 +27,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=6">
+    <link rel="stylesheet" href="styles.css?v=7">
 </head>
 <body>
     <!-- Top bar -->
@@ -187,20 +187,44 @@
             </ul>
 
             <h3 class="sub-label">GitHub Activity</h3>
-            <figure class="hm-card" data-scheme="gh">
-                <div class="hm-head">
-                    <a class="hm-title" href="https://github.com/DsThakurRawat" target="_blank" rel="noopener">GitHub · @DsThakurRawat</a>
-                    <span class="hm-count" id="gh-count">—</span>
+            <article class="cp-card" data-scheme="gh">
+                <header class="cp-head">
+                    <svg class="cp-logo" viewBox="0 0 24 24" width="28" height="28" fill="currentColor" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 0-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2 0-.4-.5-1.6.2-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.6.2 2.8.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg>
+                    <div class="cp-id">
+                        <a class="cp-name" href="https://github.com/DsThakurRawat" target="_blank" rel="noopener">GitHub</a>
+                        <span class="cp-handle">@DsThakurRawat</span>
+                    </div>
+                    <a class="cp-link" href="https://github.com/DsThakurRawat" target="_blank" rel="noopener">Profile ↗</a>
+                </header>
+
+                <div class="cp-metrics">
+                    <div class="cp-metric">
+                        <span class="cp-metric-label">Contributions</span>
+                        <span class="cp-metric-value" id="gh-total">—</span>
+                        <span class="cp-metric-sub" id="gh-total-sub">&nbsp;</span>
+                    </div>
+                    <div class="cp-metric">
+                        <span class="cp-metric-label">Longest streak</span>
+                        <span class="cp-metric-value" id="gh-streak">—</span>
+                        <span class="cp-metric-sub" id="gh-streak-sub">&nbsp;</span>
+                    </div>
                 </div>
-                <div class="hm-scroll">
-                    <div class="hm-months" id="gh-months" aria-hidden="true"></div>
-                    <div class="hm-grid" id="gh-grid" role="img" aria-label="GitHub contribution heatmap for the last 12 months"></div>
+
+                <div class="cp-activity">
+                    <div class="hm-head">
+                        <span class="hm-title">Contribution activity</span>
+                        <span class="hm-count" id="gh-count">—</span>
+                    </div>
+                    <div class="hm-scroll">
+                        <div class="hm-months" id="gh-months" aria-hidden="true"></div>
+                        <div class="hm-grid" id="gh-grid" role="img" aria-label="GitHub contribution heatmap for the last 12 months"></div>
+                    </div>
+                    <div class="hm-foot">
+                        <span class="hm-note" id="gh-note"></span>
+                        <span class="hm-legend" aria-hidden="true">Less<i data-l="0"></i><i data-l="1"></i><i data-l="2"></i><i data-l="3"></i><i data-l="4"></i>More</span>
+                    </div>
                 </div>
-                <figcaption class="hm-foot">
-                    <span class="hm-note" id="gh-note"></span>
-                    <span class="hm-legend" aria-hidden="true">Less<i data-l="0"></i><i data-l="1"></i><i data-l="2"></i><i data-l="3"></i><i data-l="4"></i>More</span>
-                </figcaption>
-            </figure>
+            </article>
 
             <p class="more"><a href="https://github.com/DsThakurRawat?tab=repositories" target="_blank" rel="noopener">All repositories →</a></p>
         </section>
@@ -295,6 +319,6 @@
         <p>© 2026 Divyansh Rawat · Built with care.</p>
     </footer>
 
-    <script src="main.js?v=6"></script>
+    <script src="main.js?v=7"></script>
 </body>
 </html>

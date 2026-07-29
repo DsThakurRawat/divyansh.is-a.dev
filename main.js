@@ -259,9 +259,35 @@
             .then(function (d) {
                 var list = d && d.contributions;
                 if (!list || !list.length) throw new Error('empty');
+
                 var counts = {};
                 list.forEach(function (c) { counts[c.date] = c.count; });
                 renderHeatmap('gh', counts, 'contribution');
+
+                var yearTotal = (d.total && (d.total.lastYear != null ? d.total.lastYear : d.total[Object.keys(d.total)[0]]));
+                if (yearTotal == null) {
+                    yearTotal = list.reduce(function (a, c) { return a + c.count; }, 0);
+                }
+                setText('gh-total', yearTotal.toLocaleString());
+
+                // Streaks over the returned window, ignoring today if it is
+                // still empty — a day in progress shouldn't break the run.
+                var today = isoDay(new Date());
+                var best = 0, run = 0, current = 0;
+                list.forEach(function (c) {
+                    if (c.count > 0) {
+                        run++;
+                        if (run > best) best = run;
+                    } else if (c.date !== today) {
+                        run = 0;
+                    }
+                });
+                current = run;
+
+                var active = list.filter(function (c) { return c.count > 0; }).length;
+                setText('gh-total-sub', active + ' active days');
+                setText('gh-streak', best + (best === 1 ? ' day' : ' days'));
+                setText('gh-streak-sub', 'current ' + current + (current === 1 ? ' day' : ' days'));
             })
             .catch(function () { failCard('gh', 'contribution'); });
     }

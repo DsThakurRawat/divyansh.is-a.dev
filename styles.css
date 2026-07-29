@@ -414,6 +414,7 @@ strong { color: var(--text); font-weight: 600; }
 .cp-card:last-child { margin-bottom: 0; }
 .cp-card[data-scheme="lc"] { --cp-accent: #ffa116; }
 .cp-card[data-scheme="cf"] { --cp-accent: #1f8dd6; }
+.cp-card[data-scheme="gh"] { --cp-accent: #2ea043; }
 
 .cp-head {
     display: flex;
@@ -423,6 +424,7 @@ strong { color: var(--text); font-weight: 600; }
     border-bottom: 1px solid var(--border-soft);
 }
 .cp-logo { border-radius: 6px; flex-shrink: 0; object-fit: contain; }
+svg.cp-logo { color: var(--text); border-radius: 0; }
 .cp-id { display: flex; flex-direction: column; min-width: 0; }
 .cp-name {
     font-weight: 600;
