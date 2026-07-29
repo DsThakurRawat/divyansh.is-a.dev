@@ -90,8 +90,32 @@
     /* ---------- Heatmap rendering ---------- */
     var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
                   'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    var DAY_MS = 86400000;
-    var WEEKS = 53;
+    var WEEKS_MAX = 53;
+
+    // Rendered data per card, so a resize can re-lay-out without refetching.
+    var hmState = {};
+
+    function isNarrow() {
+        return window.matchMedia('(max-width: 560px)').matches;
+    }
+
+    // Must track the cell + gap sizes in the stylesheet's 560px breakpoint.
+    function cellStep() { return isNarrow() ? 12 : 14; }
+
+    // How many week-columns actually fit the card. A 53-week grid is ~742px,
+    // which no phone can show — rather than a horizontal scrollbar hiding the
+    // recent weeks, draw only the columns that fit and say so in the label.
+    function weeksThatFit(prefix) {
+        var grid = document.getElementById(prefix + '-grid');
+        var host = grid && grid.parentElement;
+        var w = host ? host.clientWidth : 0;
+        if (!w) return WEEKS_MAX;
+        return Math.max(10, Math.min(WEEKS_MAX, Math.floor(w / cellStep())));
+    }
+
+    function stampNow() {
+        return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    }
 
     function isoDay(d) {
         return d.getFullYear() + '-' +
@@ -125,11 +149,23 @@
         };
     }
 
-    // counts: { 'YYYY-MM-DD': n }. Renders 53 weeks ending with the current week.
-    function renderHeatmap(prefix, counts, noun) {
+    // counts: { 'YYYY-MM-DD': n }. Renders as many weeks as the card can show,
+    // ending with the current week.
+    function renderHeatmap(prefix, counts, noun, state) {
         var grid = document.getElementById(prefix + '-grid');
         var months = document.getElementById(prefix + '-months');
         if (!grid) return;
+
+        var st = hmState[prefix] = {
+            counts: counts,
+            noun: noun,
+            stamp: (state && state.stamp) || stampNow(),
+            note: state && state.note
+        };
+
+        var WEEKS = weeksThatFit(prefix);
+        st.weeks = WEEKS;
+        grid.setAttribute('data-weeks', WEEKS);
 
         var today = new Date();
         var end = weekStart(today);
@@ -181,21 +217,40 @@
             months.appendChild(monthFrag);
         }
 
-        setText(prefix + '-count', total.toLocaleString() + ' ' + noun + (total === 1 ? '' : 's') + ' in the last year');
+        var span = WEEKS >= WEEKS_MAX
+            ? 'in the last year'
+            : 'in the last ' + Math.max(1, Math.round(WEEKS / 4.345)) + ' months';
+        setText(prefix + '-count',
+            total.toLocaleString() + ' ' + noun + (total === 1 ? '' : 's') + ' ' + span);
+
         var note = document.getElementById(prefix + '-note');
-        if (note) {
-            note.textContent = 'Updated ' + new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-        }
+        if (note) note.textContent = st.note || ('Updated ' + st.stamp);
     }
+
+    // Re-lay-out on resize / orientation change; the column count is width
+    // dependent, so a rotate would otherwise leave a clipped or stunted grid.
+    var resizeTimer;
+    window.addEventListener('resize', function () {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(function () {
+            for (var p in hmState) {
+                if (!Object.prototype.hasOwnProperty.call(hmState, p)) continue;
+                var st = hmState[p];
+                if (weeksThatFit(p) !== st.weeks) {
+                    renderHeatmap(p, st.counts, st.noun, st);
+                }
+            }
+        }, 180);
+    }, { passive: true });
 
     // Never hide the card — an empty grid plus an honest note beats a block
     // that silently vanishes and looks like a layout bug.
     function failCard(prefix, noun) {
-        renderHeatmap(prefix, {}, noun);
+        renderHeatmap(prefix, {}, noun, {
+            note: 'Could not reach the API — open the profile above.'
+        });
         var count = document.getElementById(prefix + '-count');
         if (count) count.textContent = 'Live data unavailable';
-        var note = document.getElementById(prefix + '-note');
-        if (note) note.textContent = 'Could not reach the API — open the profile above.';
     }
 
     /* ---------- GitHub ---------- */
