@@ -1,12 +1,24 @@
 {
   "name": "divyansh.is-a.dev",
   "version": "1.0.0",
-  "type": "module",
-  "description": "Portfolio website",
+  "description": "",
+  "main": "main.js",
   "scripts": {
-    "build:local": "tsc"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "devDependencies": {
-    "typescript": "^5.0.0"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DsThakurRawat/divyansh.is-a.dev.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DsThakurRawat/divyansh.is-a.dev/issues"
+  },
+  "homepage": "https://github.com/DsThakurRawat/divyansh.is-a.dev#readme",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^5.2.1"
   }
 }
