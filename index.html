@@ -27,7 +27,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=7">
+    <link rel="stylesheet" href="styles.css?v=8">
 </head>
 <body>
     <!-- Top bar -->
@@ -35,7 +35,8 @@
         <div class="topbar-inner">
             <nav class="nav" aria-label="Section navigation">
                 <a href="#about">About</a>
-                <a href="#experience"><span class="nav-full">Experience</span><span class="nav-short">Work</span></a>
+                <a href="#experience"><span class="nav-full">Experience</span><span class="nav-short">Exp</span></a>
+                <a href="#work"><span class="nav-full">Featured Work</span><span class="nav-short">Work</span></a>
                 <a href="#rnd"><span class="nav-full">Research &amp; Development</span><span class="nav-short">R&amp;D</span></a>
                 <a href="#cp"><span class="nav-full">Competitive Programming</span><span class="nav-short">CP</span></a>
             </nav>
@@ -73,7 +74,9 @@
             <p>
                 I'm an AI &amp; Backend Engineer focused on <strong>distributed systems</strong>, <strong>agentic AI</strong>,
                 and <strong>deep machine learning</strong>. I like building intelligent systems from the ground up — robust
-                backend services in Go and Rust, and multi-agent networks in Python and TypeScript. I contribute to open
+                backend services in Go and Rust, and multi-agent networks in Python and TypeScript. I also ship and
+                operate production systems end-to-end — <a href="#work">Quadis Hotels</a> runs on AWS infrastructure I
+                built, deployed and handed over. I contribute to open
                 source (including LiteLLM), write the occasional technical exploration, and spend spare cycles on
                 competitive programming to keep my algorithmic thinking sharp.
             </p>
@@ -81,7 +84,7 @@
                 <span>Go</span><span>Python</span><span>Rust</span><span>TypeScript</span>
                 <span>AI/ML</span><span>Agentic AI</span><span>GenAI</span><span>LLM Inference</span>
                 <span>Distributed Systems</span><span>LangGraph</span><span>LangChain</span><span>MCP</span>
-                <span>LiteLLM</span><span>Pydantic-AI</span><span>PostgreSQL</span><span>Docker</span>
+                <span>LiteLLM</span><span>Pydantic-AI</span><span>PostgreSQL</span><span>AWS</span><span>Docker</span>
             </div>
         </section>
 
@@ -110,6 +113,65 @@
                 </div>
                 <p class="entry-sub">Electronics &amp; Communication Engineering</p>
             </div>
+        </section>
+
+        <!-- Featured Work — shipped, in production, someone else depends on it.
+             Deliberately its own section above R&D: everything below is a repo
+             link, this one is a URL a visitor can open and book a room on. -->
+        <section id="work" class="section">
+            <h2 class="section-title">Featured Work</h2>
+            <article class="work-card">
+                <header class="work-head">
+                    <div class="work-id">
+                        <h3 class="work-title">Quadis Hotels</h3>
+                        <span class="work-status"><span class="dot"></span> Live in production</span>
+                    </div>
+                    <nav class="work-links" aria-label="Quadis links">
+                        <a class="work-link work-link--primary" href="https://quadishotels.com" target="_blank" rel="noopener">quadishotels.com ↗</a>
+                        <a class="work-link" href="https://github.com/DsThakurRawat/Quadis" target="_blank" rel="noopener">Code ↗</a>
+                    </nav>
+                </header>
+
+                <p class="work-lede">
+                    A booking platform for a Delhi&nbsp;NCR hotel group — rooms, rates, real payments and an
+                    admin back-office. Designed, built, deployed and operated end-to-end, solo, and running
+                    live on infrastructure I stood up and handed over.
+                </p>
+
+                <div class="work-arch">
+                    <span class="arch-row">
+                        <b>React + TS SPA</b><span class="arw">→</span><b>nginx</b><span class="arw">→</span><b>Node / Express API</b><span class="arw">→</span><b>PostgreSQL</b>
+                    </span>
+                    <span class="arch-row arch-row--sub">
+                        EC2 <span class="arw">·</span> ap-south-1 <span class="arw">·</span> S3 media <span class="arw">·</span> Razorpay
+                        <span class="arw">·</span> 9 properties <span class="arw">·</span> 20 room types <span class="arw">·</span> 197 rooms
+                    </span>
+                </div>
+
+                <ul class="entry-points work-points">
+                    <li>Shipped the whole stack alone — a <strong>React 18 + TypeScript</strong> front end on Vite, a
+                        <strong>Node/Express + TypeScript</strong> booking API, and a <strong>PostgreSQL</strong> schema
+                        covering properties, room types, rate plans, holds and bookings.</li>
+                    <li>Owned production on <strong>AWS end-to-end</strong>, then migrated the entire stack off my account
+                        (S3 + CloudFront + Elastic Beanstalk + RDS) onto <strong>the client's own AWS account</strong> —
+                        a hardened EC2 instance in ap-south-1 with an Elastic IP, nginx, systemd and Postgres — via
+                        scripted build/push deploys and a rehearsed DNS cutover, with no data loss.</li>
+                    <li>Integrated <strong>Razorpay</strong> checkout with webhook signature verification, PDF invoicing and
+                        WhatsApp confirmations; secrets load from SSM Parameter Store and every auth path
+                        <strong>fails closed</strong> rather than issuing forgeable sessions.</li>
+                    <li>Hardened both box and app: TLS and security headers at nginx, rate limiting, Helmet and Zod
+                        validation on every route, and a systemd unit locked down to
+                        <code>ProtectSystem=strict · NoNewPrivileges · MemoryMax</code>.</li>
+                    <li>Built <strong>Quadis Assist</strong>, an LLM concierge on Groq with a deterministic fallback, so the
+                        chat still answers guests when the model is unreachable.</li>
+                </ul>
+
+                <div class="stack work-stack" aria-label="Quadis tech stack">
+                    <span>React</span><span>TypeScript</span><span>Node.js</span><span>Express</span>
+                    <span>PostgreSQL</span><span>AWS EC2</span><span>S3</span><span>CloudFront</span>
+                    <span>nginx</span><span>systemd</span><span>Razorpay</span><span>Vite</span><span>Zod</span>
+                </div>
+            </article>
         </section>
 
         <!-- Research & Development (highlighted work + open source + activity) -->
