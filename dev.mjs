@@ -12,7 +12,8 @@ const __dirname = dirname(__filename);
 const app = express();
 app.use(cors());
 
-app.use(express.static(__dirname));
+// cleanUrls: true in vercel.json — serve /blog/slug as blog/slug.html here too.
+app.use(express.static(__dirname, { extensions: ['html'] }));
 
 app.get('/api/cf-proxy', async (req, res) => {
     try {

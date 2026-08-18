@@ -4,7 +4,10 @@
   "description": "Personal site — divyansh.is-a.dev",
   "main": "main.js",
   "scripts": {
-    "dev": "node dev.mjs"
+    "build": "node build.mjs",
+    "new": "node new-post.mjs",
+    "dev": "node build.mjs && node dev.mjs",
+    "syndicate": "node syndicate.mjs"
   },
   "repository": {
     "type": "git",
@@ -20,6 +23,8 @@
   "type": "module",
   "devDependencies": {
     "cors": "^2.8.6",
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "highlight.js": "^11.12.0",
+    "marked": "^18.0.10"
   }
 }

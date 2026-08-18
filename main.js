@@ -1,43 +1,12 @@
 /* ============================================================
-   Divyansh Rawat — portfolio interactions
-   Theme toggle · scroll-spy · reveal · live CP/LeetCode stats
+   Divyansh Rawat — homepage interactions
+   Scroll-spy · live GitHub / LeetCode / Codeforces stats
    ============================================================ */
 (function () {
     'use strict';
 
-    var root = document.documentElement;
-
-    /* ---------- Theme toggle ---------- */
-    var toggle = document.getElementById('theme-toggle');
-    if (toggle) {
-        toggle.addEventListener('click', function () {
-            var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-            root.setAttribute('data-theme', next);
-            try { localStorage.setItem('theme', next); } catch (e) {}
-            var meta = document.querySelector('meta[name="theme-color"]');
-            if (meta) meta.setAttribute('content', next === 'dark' ? '#0e0e10' : '#fbfbf8');
-        });
-    }
-
-    /* ---------- Sticky bar shadow ---------- */
-    var bar = document.querySelector('.topbar');
-    var onScroll = function () {
-        if (bar) bar.classList.toggle('scrolled', window.scrollY > 8);
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
-
-    /* ---------- Reveal on scroll ---------- */
-    var sections = Array.prototype.slice.call(document.querySelectorAll('.section, .hero'));
-    if ('IntersectionObserver' in window) {
-        sections.forEach(function (el) { el.classList.add('reveal'); });
-        var io = new IntersectionObserver(function (entries) {
-            entries.forEach(function (e) {
-                if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
-            });
-        }, { threshold: 0.12 });
-        sections.forEach(function (el) { io.observe(el); });
-    }
+    /* Theme toggle, sticky-bar shadow and reveal-on-scroll live in site.js,
+       which the blog pages load too. This file is homepage-only. */
 
     /* ---------- Scroll-spy nav ---------- */
     var navLinks = Array.prototype.slice.call(document.querySelectorAll('.nav a'))
