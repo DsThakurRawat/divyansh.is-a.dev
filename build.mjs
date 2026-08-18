@@ -120,7 +120,7 @@ marked.use({
 
 /* ---------- page shell ---------- */
 
-function head({ title, desc, canonical, ogType = 'website', jsonld, robots }) {
+function head({ title, desc, canonical, ogType = 'website', jsonld, robots, article }) {
     return `<!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
@@ -130,12 +130,18 @@ function head({ title, desc, canonical, ogType = 'website', jsonld, robots }) {
     <link rel="canonical" href="${esc(canonical)}">
     <meta name="description" content="${esc(desc)}">
     <meta name="author" content="${esc(SITE.author)}">
-${robots ? `    <meta name="robots" content="${esc(robots)}">\n` : ''}    <meta property="og:title" content="${esc(title)}">
+    <meta name="robots" content="${esc(robots || 'index, follow, max-image-preview:large, max-snippet:-1')}">
+    <meta property="og:title" content="${esc(title)}">
     <meta property="og:description" content="${esc(desc)}">
     <meta property="og:url" content="${esc(canonical)}">
     <meta property="og:type" content="${ogType}">
     <meta property="og:image" content="${SITE.url}${SITE.image}">
     <meta property="og:site_name" content="${esc(SITE.title)}">
+    <meta property="og:locale" content="en_US">
+${article ? `    <meta property="article:published_time" content="${article.published}">
+    <meta property="article:modified_time" content="${article.modified}">
+    <meta property="article:author" content="${SITE.url}/">
+${(article.tags || []).map((t) => `    <meta property="article:tag" content="${esc(t)}">`).join('\n')}\n` : ''}
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@${SITE.x}">
     <meta name="twitter:creator" content="@${SITE.x}">
@@ -159,7 +165,7 @@ ${robots ? `    <meta name="robots" content="${esc(robots)}">\n` : ''}    <meta 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/styles.css?v=10">
+    <link rel="stylesheet" href="/styles.css?v=11">
 ${jsonld ? `    <script type="application/ld+json">\n${jsonld}\n    </script>\n` : ''}</head>
 <body>
     <header class="topbar">
@@ -191,20 +197,41 @@ ${scripts}</body>
 
 function postPage(post, prev, next) {
     const canonical = `${SITE.url}/blog/${post.slug}`;
+    const person = {
+        '@type': 'Person',
+        name: SITE.author,
+        alternateName: ['DsThakurRawat', '@' + SITE.x],
+        url: SITE.url + '/',
+        sameAs: [`https://x.com/${SITE.x}`, `https://github.com/${SITE.x}`],
+    };
     const jsonld = JSON.stringify({
         '@context': 'https://schema.org',
-        '@type': 'BlogPosting',
-        headline: post.title,
-        description: post.summary,
-        datePublished: post.date,
-        dateModified: post.updated || post.date,
-        author: { '@type': 'Person', name: SITE.author, url: SITE.url + '/' },
-        publisher: { '@type': 'Person', name: SITE.author, url: SITE.url + '/' },
-        mainEntityOfPage: canonical,
-        url: canonical,
-        image: SITE.url + SITE.image,
-        keywords: (post.tags || []).join(', '),
-        wordCount: post.words,
+        '@graph': [
+            {
+                '@type': 'BlogPosting',
+                headline: post.title,
+                description: post.summary,
+                datePublished: post.date,
+                dateModified: post.updated || post.date,
+                author: person,
+                publisher: person,
+                mainEntityOfPage: canonical,
+                url: canonical,
+                image: SITE.url + SITE.image,
+                keywords: (post.tags || []).join(', '),
+                wordCount: post.words,
+                inLanguage: 'en',
+                timeRequired: `PT${post.minutes}M`,
+            },
+            {
+                '@type': 'BreadcrumbList',
+                itemListElement: [
+                    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url + '/' },
+                    { '@type': 'ListItem', position: 2, name: SITE.blogName, item: SITE.url + '/blog' },
+                    { '@type': 'ListItem', position: 3, name: post.title, item: canonical },
+                ],
+            },
+        ],
     }, null, 2).split('\n').map((l) => '    ' + l).join('\n');
 
     const shareText = encodeURIComponent(`${post.title}\n\n${canonical}`);
@@ -219,6 +246,7 @@ function postPage(post, prev, next) {
         ogType: 'article',
         jsonld,
         robots: post.draft ? 'noindex, nofollow' : '',
+        article: { published: post.date, modified: post.updated || post.date, tags: post.tags },
     }) + `
     <main class="wrap post-wrap">
         <article class="post">
@@ -284,7 +312,12 @@ function indexPage(posts) {
         name: `${SITE.author} — ${SITE.blogName}`,
         description: SITE.blogDesc,
         url: canonical,
-        author: { '@type': 'Person', name: SITE.author, url: SITE.url + '/' },
+        author: {
+            '@type': 'Person',
+            name: SITE.author,
+            alternateName: ['DsThakurRawat', '@' + SITE.x],
+            url: SITE.url + '/',
+        },
         blogPost: posts.map((p) => ({
             '@type': 'BlogPosting',
             headline: p.title,
@@ -308,7 +341,7 @@ function indexPage(posts) {
 
     return head({
         title: `${SITE.blogName} — ${SITE.author}`,
-        desc: SITE.blogDesc,
+        desc: `${SITE.author} (@${SITE.x}) — ${SITE.blogDesc}`,
         canonical,
         jsonld,
     }) + `

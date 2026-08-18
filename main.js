@@ -56,6 +56,32 @@
         });
     }
 
+    /* ---------- Derived-stat cache ----------
+       Codeforces answers user.status with the entire submission history —
+       4,000 rows here — and rate-limits to roughly one call every two
+       seconds. Re-pulling all of that every ten minutes to recompute two
+       numbers is rude to their API and slow on a phone. So cache what was
+       computed rather than what was downloaded: a few hundred bytes per
+       card, and the network is only touched once the entry goes stale. */
+    var TTL_FAST = 30 * 60 * 1000;        // GitHub / LeetCode
+    var TTL_SLOW = 6 * 60 * 60 * 1000;    // Codeforces
+
+    function cacheGet(key, ttl) {
+        try {
+            var raw = localStorage.getItem('stats:' + key);
+            if (!raw) return null;
+            var o = JSON.parse(raw);
+            if (!o || typeof o.t !== 'number' || Date.now() - o.t > ttl) return null;
+            return o.d;
+        } catch (e) { return null; }
+    }
+
+    function cacheSet(key, d) {
+        try {
+            localStorage.setItem('stats:' + key, JSON.stringify({ t: Date.now(), d: d }));
+        } catch (e) {}   // private mode or quota: just skip the cache
+    }
+
     /* ---------- Heatmap rendering ---------- */
     var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
                   'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -223,7 +249,18 @@
     }
 
     /* ---------- GitHub ---------- */
+    function paintGitHub(g) {
+        renderHeatmap('gh', g.counts, 'contribution');
+        setText('gh-total', g.total.toLocaleString());
+        setText('gh-total-sub', g.active + ' active days');
+        setText('gh-streak', g.best + (g.best === 1 ? ' day' : ' days'));
+        setText('gh-streak-sub', 'current ' + g.current + (g.current === 1 ? ' day' : ' days'));
+    }
+
     function loadGitHub() {
+        var hit = cacheGet('gh', TTL_FAST);
+        if (hit) { paintGitHub(hit); return Promise.resolve(); }
+
         return getJSONRetry('https://github-contributions-api.jogruber.de/v4/' + GH_USER + '?y=last')
             .then(function (d) {
                 var list = d && d.contributions;
@@ -231,18 +268,16 @@
 
                 var counts = {};
                 list.forEach(function (c) { counts[c.date] = c.count; });
-                renderHeatmap('gh', counts, 'contribution');
 
                 var yearTotal = (d.total && (d.total.lastYear != null ? d.total.lastYear : d.total[Object.keys(d.total)[0]]));
                 if (yearTotal == null) {
                     yearTotal = list.reduce(function (a, c) { return a + c.count; }, 0);
                 }
-                setText('gh-total', yearTotal.toLocaleString());
 
                 // Streaks over the returned window, ignoring today if it is
                 // still empty — a day in progress shouldn't break the run.
                 var today = isoDay(new Date());
-                var best = 0, run = 0, current = 0;
+                var best = 0, run = 0;
                 list.forEach(function (c) {
                     if (c.count > 0) {
                         run++;
@@ -251,12 +286,16 @@
                         run = 0;
                     }
                 });
-                current = run;
 
-                var active = list.filter(function (c) { return c.count > 0; }).length;
-                setText('gh-total-sub', active + ' active days');
-                setText('gh-streak', best + (best === 1 ? ' day' : ' days'));
-                setText('gh-streak-sub', 'current ' + current + (current === 1 ? ' day' : ' days'));
+                var g = {
+                    counts: counts,
+                    total: yearTotal,
+                    active: list.filter(function (c) { return c.count > 0; }).length,
+                    best: best,
+                    current: run
+                };
+                cacheSet('gh', g);
+                paintGitHub(g);
             })
             .catch(function () { failCard('gh', 'contribution'); });
     }
@@ -272,30 +311,53 @@
             .catch(function () { return getJSON(LC_FALLBACK + fallbackPath); });
     }
 
+    function paintLcSolved(v) {
+        setText('lc-solved', v.total);
+        if (v.easy != null && v.med != null && v.hard != null) {
+            setText('lc-breakdown', v.easy + ' easy · ' + v.med + ' med · ' + v.hard + ' hard');
+        }
+    }
+
+    function paintLcContest(v) {
+        setText('lc-contest', Math.round(v.rating));
+        var bits = [];
+        if (v.attend != null) bits.push(v.attend + ' contests');
+        if (v.top != null) bits.push('top ' + v.top.toFixed(1) + '%');
+        if (bits.length) setText('lc-contest-sub', bits.join(' · '));
+    }
+
     function loadLeetCode() {
-        var solved = lcGet('solved', '/solved')
-            .then(function (d) {
-                var total = d.solvedProblem != null ? d.solvedProblem : d.totalSolved;
-                if (total == null) throw new Error('empty');
-                setText('lc-solved', total);
-                if (d.easySolved != null && d.mediumSolved != null && d.hardSolved != null) {
-                    setText('lc-breakdown', d.easySolved + ' easy · ' + d.mediumSolved + ' med · ' + d.hardSolved + ' hard');
-                }
-            })
-            .catch(function () {});
+        var solved = (function () {
+            var hit = cacheGet('lc.solved', TTL_FAST);
+            if (hit) { paintLcSolved(hit); return Promise.resolve(); }
+            return lcGet('solved', '/solved')
+                .then(function (d) {
+                    var total = d.solvedProblem != null ? d.solvedProblem : d.totalSolved;
+                    if (total == null) throw new Error('empty');
+                    var v = { total: total, easy: d.easySolved, med: d.mediumSolved, hard: d.hardSolved };
+                    cacheSet('lc.solved', v);
+                    paintLcSolved(v);
+                })
+                .catch(function () {});
+        })();
 
-        var contest = lcGet('contest', '/contest')
-            .then(function (d) {
-                if (d.contestRating == null) throw new Error('empty');
-                setText('lc-contest', Math.round(d.contestRating));
-                var sub = [];
-                if (d.contestAttend != null) sub.push(d.contestAttend + ' contests');
-                if (d.contestTopPercentage != null) sub.push('top ' + d.contestTopPercentage.toFixed(1) + '%');
-                if (sub.length) setText('lc-contest-sub', sub.join(' · '));
-            })
-            .catch(function () {});
+        var contest = (function () {
+            var hit = cacheGet('lc.contest', TTL_FAST);
+            if (hit) { paintLcContest(hit); return Promise.resolve(); }
+            return lcGet('contest', '/contest')
+                .then(function (d) {
+                    if (d.contestRating == null) throw new Error('empty');
+                    var v = { rating: d.contestRating, attend: d.contestAttend, top: d.contestTopPercentage };
+                    cacheSet('lc.contest', v);
+                    paintLcContest(v);
+                })
+                .catch(function () {});
+        })();
 
-        var calendar = lcGet('calendar', '/calendar')
+        var calendar = (function () {
+            var hit = cacheGet('lc.cal', TTL_FAST);
+            if (hit) { renderHeatmap('lc', hit, 'submission'); return Promise.resolve(); }
+            return lcGet('calendar', '/calendar')
             .then(function (d) {
                 // submissionCalendar is { unixSeconds: count } — a JSON *string*
                 // from our proxy, already an object from the fallback mirror.
@@ -307,9 +369,11 @@
                     if (!Object.prototype.hasOwnProperty.call(raw, ts)) continue;
                     counts[isoDay(new Date(parseInt(ts, 10) * 1000))] = raw[ts];
                 }
+                cacheSet('lc.cal', counts);
                 renderHeatmap('lc', counts, 'submission');
             })
             .catch(function () { failCard('lc', 'submission'); });
+        })();
 
         return Promise.all([solved, contest, calendar]);
     }
@@ -338,36 +402,68 @@
         });
     }
 
+    function paintCfInfo(v) {
+        if (v.rating != null) setText('cf-rating', v.rating);
+        if (v.rank) setText('cf-rank', v.rank + (v.maxRating ? ' · max ' + v.maxRating : ''));
+    }
+
+    function paintCfSubs(v) {
+        setText('cf-solved', v.solved);
+        setText('cf-solved-sub', v.subs.toLocaleString() + ' submissions');
+        renderHeatmap('cf', v.counts, 'submission');
+    }
+
     function loadCodeforces() {
-        return cfGet('user.info', 'handles=' + CF_USER)
-            .then(function (result) {
-                var u = result[0];
-                if (u) {
-                    if (u.rating != null) setText('cf-rating', u.rating);
-                    var rank = u.rank ? u.rank.replace(/\b\w/g, function (c) { return c.toUpperCase(); }) : null;
-                    if (rank) setText('cf-rank', rank + (u.maxRating ? ' · max ' + u.maxRating : ''));
-                }
-            })
-            .catch(function () {})
+        var info = cacheGet('cf.info', TTL_SLOW);
+        var subs = cacheGet('cf.subs', TTL_SLOW);
+
+        // Both halves warm: nothing to fetch, and the 4,000-row call in
+        // particular never happens.
+        if (info && subs) {
+            paintCfInfo(info);
+            paintCfSubs(subs);
+            return Promise.resolve();
+        }
+
+        return (info ? Promise.resolve(paintCfInfo(info))
+                     : cfGet('user.info', 'handles=' + CF_USER)
+                        .then(function (result) {
+                            var u = result[0];
+                            if (!u) return;
+                            var v = {
+                                rating: u.rating,
+                                maxRating: u.maxRating,
+                                rank: u.rank ? u.rank.replace(/\b\w/g, function (c) { return c.toUpperCase(); }) : ''
+                            };
+                            cacheSet('cf.info', v);
+                            paintCfInfo(v);
+                        })
+                        .catch(function () {}))
             .then(function () {
-                return new Promise(function (res) { setTimeout(res, 2100); });
-            })
-            .then(function () {
-                return cfGet('user.status', 'handle=' + CF_USER + '&from=1&count=4000');
-            })
-            .then(function (subs) {
-                var counts = {};
-                var solvedSet = {};
-                subs.forEach(function (s) {
-                    var day = isoDay(new Date(s.creationTimeSeconds * 1000));
-                    counts[day] = (counts[day] || 0) + 1;
-                    if (s.verdict === 'OK' && s.problem) {
-                        solvedSet[s.problem.contestId + '-' + s.problem.index] = 1;
-                    }
-                });
-                setText('cf-solved', Object.keys(solvedSet).length);
-                setText('cf-solved-sub', subs.length.toLocaleString() + ' submissions');
-                renderHeatmap('cf', counts, 'submission');
+                if (subs) { paintCfSubs(subs); return null; }
+                // Codeforces allows about one call every two seconds.
+                return new Promise(function (res) { setTimeout(res, 2100); })
+                    .then(function () {
+                        return cfGet('user.status', 'handle=' + CF_USER + '&from=1&count=4000');
+                    })
+                    .then(function (list) {
+                        var counts = {};
+                        var solvedSet = {};
+                        list.forEach(function (s) {
+                            var day = isoDay(new Date(s.creationTimeSeconds * 1000));
+                            counts[day] = (counts[day] || 0) + 1;
+                            if (s.verdict === 'OK' && s.problem) {
+                                solvedSet[s.problem.contestId + '-' + s.problem.index] = 1;
+                            }
+                        });
+                        var v = {
+                            counts: counts,
+                            solved: Object.keys(solvedSet).length,
+                            subs: list.length
+                        };
+                        cacheSet('cf.subs', v);
+                        paintCfSubs(v);
+                    });
             })
             .catch(function () { failCard('cf', 'submission'); });
     }
@@ -390,9 +486,9 @@
     }
     setInterval(function () {
         if (document.visibilityState === 'visible') refreshTracked();
-    }, 10 * 60 * 1000);
+    }, 30 * 60 * 1000);
     document.addEventListener('visibilitychange', function () {
-        if (document.visibilityState === 'visible' && Date.now() - lastRefresh > 2 * 60 * 1000) {
+        if (document.visibilityState === 'visible' && Date.now() - lastRefresh > 15 * 60 * 1000) {
             refreshTracked();
         }
     });

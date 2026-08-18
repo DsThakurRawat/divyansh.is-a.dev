@@ -1209,3 +1209,60 @@ body.sr-lock { overflow: hidden; }
     .sr-panel { padding: 1.1rem 1rem 1rem; }
     .sr-help { display: none; }
 }
+
+/* ============================================================
+   Phone polish
+   ============================================================ */
+
+/* Grey flash on tap looks like a bug on a dark theme. */
+a, button { -webkit-tap-highlight-color: transparent; }
+
+/* A long URL or an unbroken identifier must not widen the page. */
+.post-body { overflow-wrap: anywhere; }
+.post-body p, .post-body li { overflow-wrap: break-word; }
+
+/* Nothing may scroll the body sideways. */
+html, body { max-width: 100%; overflow-x: hidden; }
+
+@media (max-width: 560px) {
+    /* Thumb-sized targets. Anything a finger aims at gets ~44px. */
+    .tool-btn { padding: .62rem .85rem; font-size: .78rem; }
+    .sr-btn { padding: .68rem 1rem; font-size: .8rem; }
+    .sr-mini { padding: .68rem .9rem; }
+    .sr-close { padding: .5rem; top: .5rem; right: .5rem; }
+    .code-copy { padding: .45rem .6rem; }
+    .link-btn { padding: .25rem 0; }
+    .post-row-link { padding: 1.1rem 0; }
+    .nav a { padding: 6px 9px; }
+
+    /* The speed reader is the one thing that goes full-bleed: on a phone
+       it is the whole screen, so it should behave like it. */
+    .sr-overlay { padding: 0; align-items: stretch; }
+    .sr-panel {
+        width: 100%;
+        border: none;
+        border-radius: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 1rem 1rem calc(1rem + env(safe-area-inset-bottom));
+    }
+    .sr-stage { padding: 1.4rem 0 1.2rem; }
+    .sr-controls { gap: .4rem; }
+    .sr-wpm { min-width: 4rem; }
+
+    /* Long headings inside a post shouldn't tower over the body text. */
+    .post-body h2 { font-size: 1.38rem; margin: 2.1rem 0 .7rem; }
+    .post-body h3 { font-size: 1.16rem; }
+    .post-title { line-height: 1.18; }
+    .post-head { padding-top: 2rem; }
+
+    /* Anchors are hover-only affordances; on touch they are noise. */
+    .anchor { display: none; }
+}
+
+/* Phones in landscape have almost no height — give the reader the room. */
+@media (max-height: 460px) {
+    .sr-stage { padding: .8rem 0 .6rem; }
+    .sr-help { display: none; }
+}

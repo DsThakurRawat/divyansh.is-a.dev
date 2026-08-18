@@ -200,6 +200,10 @@
         overlay.querySelector('#sr-faster').addEventListener('click', function () { setWpm(wpm + WPM_STEP); });
         overlay.addEventListener('click', function (e) { if (e.target === overlay) close(); });
 
+        // On a phone the word area is the biggest target on screen, so it
+        // is the play/pause control. No aiming for a small button.
+        overlay.querySelector('.sr-stage').addEventListener('click', toggle);
+
         var prog = overlay.querySelector('#sr-progress');
         prog.addEventListener('click', function (e) {
             var r = prog.getBoundingClientRect();
