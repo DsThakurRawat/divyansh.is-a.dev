@@ -3,14 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Divyansh Rawat</title>
-    <meta name="description" content="Divyansh Rawat — AI &amp; Backend Engineer building agentic systems and distributed backends. Open-source contributor. B.Tech ECE (AI/ML) at IIITDM Kurnool.">
+    <title>Divyansh Rawat — AI &amp; Backend Engineer</title>
+    <link rel="canonical" href="https://divyansh.is-a.dev/">
+    <meta name="description" content="AI &amp; Backend Engineer. Agentic AI and distributed backends in Go, Rust, Python and TypeScript. Open-source contributor. B.Tech ECE at IIITDM Kurnool.">
     <meta name="author" content="Divyansh Rawat">
     <meta property="og:title" content="Divyansh Rawat — AI &amp; Backend Engineer">
     <meta property="og:description" content="Building agentic AI systems and distributed backends.">
     <meta property="og:url" content="https://divyansh.is-a.dev">
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://divyansh.is-a.dev/assets/pfp.jpeg?v=3">
+    <meta property="og:image:alt" content="Divyansh Rawat">
+    <meta property="og:site_name" content="Divyansh Rawat">
+
+    <!-- Square portrait, so `summary` (which shows it uncropped) rather than
+         summary_large_image, which would center-crop it to 1.91:1. -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@DsThakurRawat">
+    <meta name="twitter:creator" content="@DsThakurRawat">
+    <meta name="twitter:title" content="Divyansh Rawat — AI &amp; Backend Engineer">
+    <meta name="twitter:description" content="Building agentic AI systems and distributed backends.">
+    <meta name="twitter:image" content="https://divyansh.is-a.dev/assets/pfp.jpeg?v=3">
+
     <meta name="theme-color" content="#0e0e10">
     <link rel="icon" type="image/jpeg" href="assets/pfp.jpeg?v=3">
 
@@ -27,7 +40,32 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=8">
+    <link rel="stylesheet" href="styles.css?v=9">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Divyansh Rawat",
+      "alternateName": "@DsThakurRawat",
+      "url": "https://divyansh.is-a.dev/",
+      "image": "https://divyansh.is-a.dev/assets/pfp.jpeg?v=3",
+      "jobTitle": "AI & Backend Engineer",
+      "email": "mailto:divyanshrawatofficial@gmail.com",
+      "alumniOf": {
+        "@type": "CollegeOrUniversity",
+        "name": "Indian Institute of Information Technology, Design & Manufacturing, Kurnool"
+      },
+      "knowsAbout": ["Agentic AI", "Distributed Systems", "Go", "Python", "Rust", "TypeScript", "LLM Inference"],
+      "sameAs": [
+        "https://github.com/DsThakurRawat",
+        "https://x.com/DsThakurRawat",
+        "https://www.linkedin.com/in/divyansh-rawat-aba930313/",
+        "https://leetcode.com/u/DsThakurRawat/",
+        "https://codeforces.com/profile/lost_boy21"
+      ]
+    }
+    </script>
 </head>
 <body>
     <!-- Top bar -->
@@ -54,16 +92,18 @@
             <img src="assets/pfp.jpeg?v=3" alt="Divyansh Rawat" class="avatar" width="96" height="96">
             <div class="hero-body">
                 <h1 class="name">Divyansh Rawat</h1>
+                <p class="handle"><a href="https://x.com/DsThakurRawat" target="_blank" rel="noopener">@DsThakurRawat</a></p>
                 <p class="role">AI &amp; Backend Engineer — agentic systems &amp; distributed backends</p>
                 <p class="status"><span class="dot"></span> Open to full-time roles &amp; internships</p>
                 <nav class="links" aria-label="Profiles and contact">
                     <a href="https://github.com/DsThakurRawat" target="_blank" rel="noopener">GitHub</a>
                     <a href="https://www.linkedin.com/in/divyansh-rawat-aba930313/" target="_blank" rel="noopener">LinkedIn</a>
+                    <a href="https://x.com/DsThakurRawat" target="_blank" rel="noopener">X</a>
                     <a href="https://leetcode.com/u/DsThakurRawat/" target="_blank" rel="noopener">LeetCode</a>
                     <a href="https://codeforces.com/profile/lost_boy21" target="_blank" rel="noopener">Codeforces</a>
                     <a href="mailto:divyanshrawatofficial@gmail.com">Email</a>
                     <a href="mailto:divyansthakur594@gmail.com">Email (alt)</a>
-                    <a href="/resume.pdf" target="_blank" rel="noopener">Résumé</a>
+                    <a href="https://drive.google.com/file/d/1Z4xsatJNX-u8O18ZaNS-4L5OR1YHIfhZ/view?usp=sharing" target="_blank" rel="noopener">Résumé</a>
                 </nav>
             </div>
         </section>
@@ -72,13 +112,14 @@
         <section id="about" class="section">
             <h2 class="section-title">About</h2>
             <p>
-                I'm an AI &amp; Backend Engineer focused on <strong>distributed systems</strong>, <strong>agentic AI</strong>,
-                and <strong>deep machine learning</strong>. I like building intelligent systems from the ground up — robust
-                backend services in Go and Rust, and multi-agent networks in Python and TypeScript. I also ship and
-                operate production systems end-to-end — <a href="#work">Quadis Hotels</a> runs on AWS infrastructure I
-                built, deployed and handed over. I contribute to open
-                source (including LiteLLM), write the occasional technical exploration, and spend spare cycles on
-                competitive programming to keep my algorithmic thinking sharp.
+                I build backend services in Go and Rust, and multi-agent systems in Python and TypeScript.
+                What I care about is <strong>distributed systems</strong>, <strong>agentic AI</strong> and
+                <strong>deep learning</strong>.
+            </p>
+            <p>
+                I ship what I build and then run it. <a href="#work">Quadis Hotels</a> takes real bookings on AWS
+                infrastructure I set up, deployed, and later handed to the client. I contribute to open source,
+                including LiteLLM, and I do competitive programming for fun.
             </p>
             <div class="stack" aria-label="Tech stack">
                 <span>Go</span><span>Python</span><span>Rust</span><span>TypeScript</span>
@@ -98,10 +139,10 @@
                     <span class="entry-date">Apr 2026 — Present</span>
                 </div>
                 <ul class="entry-points" id="exp-points">
-                    <li>Delivered the real-time speech-to-text pipeline for a cross-platform AI product (macOS, Windows, iOS, Android), achieving ~700ms end-to-end latency in production by serving Whisper via Groq LPU inference.</li>
-                    <li>Improved transcription accuracy on technical and domain-specific terms by tuning model decoding parameters and designing a custom-vocabulary / prompt layer, measurably raising clean-output quality across target applications.</li>
-                    <li>Owned a direct user-feedback loop with the product community: triaged incoming feature requests and bug reports, prioritized them by impact, and shipped the most-requested features within committed timelines.</li>
-                    <li>Diagnosed and resolved platform-specific, user-reported issues (installation, OS permissions, audio-device and configuration failures) across macOS / Windows / Android, unblocking users on their own devices and improving retention.</li>
+                    <li>Built the real-time speech-to-text pipeline behind a product that ships on macOS, Windows, iOS and Android. Whisper served on Groq LPU inference, ~700ms end to end in production.</li>
+                    <li>Tuned the decoding parameters and added a custom-vocabulary prompt layer, which fixed the technical and domain-specific terms the base model kept mangling.</li>
+                    <li>Ran the feedback loop with the product community myself: triaged feature requests and bug reports, ranked them by impact, shipped the ones people actually asked for.</li>
+                    <li>Debugged the platform-specific failures users actually hit (installers, OS permissions, audio devices, broken configs) across macOS, Windows and Android, usually on their machine rather than mine.</li>
                 </ul>
             </div>
 
@@ -133,9 +174,9 @@
                 </header>
 
                 <p class="work-lede">
-                    A booking platform for a Delhi&nbsp;NCR hotel group — rooms, rates, real payments and an
-                    admin back-office. Designed, built, deployed and operated end-to-end, solo, and running
-                    live on infrastructure I stood up and handed over.
+                    A booking platform for a Delhi&nbsp;NCR hotel group: rooms, rates, real payments, admin
+                    back-office. I designed it, built it, deployed it and ran it, alone. It is live today on
+                    infrastructure I stood up and later handed to the client.
                 </p>
 
                 <div class="work-arch">
@@ -149,21 +190,21 @@
                 </div>
 
                 <ul class="entry-points work-points">
-                    <li>Shipped the whole stack alone — a <strong>React 18 + TypeScript</strong> front end on Vite, a
+                    <li>The whole stack is mine: a <strong>React 18 + TypeScript</strong> front end on Vite, a
                         <strong>Node/Express + TypeScript</strong> booking API, and a <strong>PostgreSQL</strong> schema
                         covering properties, room types, rate plans, holds and bookings.</li>
-                    <li>Owned production on <strong>AWS end-to-end</strong>, then migrated the entire stack off my account
-                        (S3 + CloudFront + Elastic Beanstalk + RDS) onto <strong>the client's own AWS account</strong> —
-                        a hardened EC2 instance in ap-south-1 with an Elastic IP, nginx, systemd and Postgres — via
-                        scripted build/push deploys and a rehearsed DNS cutover, with no data loss.</li>
-                    <li>Integrated <strong>Razorpay</strong> checkout with webhook signature verification, PDF invoicing and
-                        WhatsApp confirmations; secrets load from SSM Parameter Store and every auth path
-                        <strong>fails closed</strong> rather than issuing forgeable sessions.</li>
-                    <li>Hardened both box and app: TLS and security headers at nginx, rate limiting, Helmet and Zod
-                        validation on every route, and a systemd unit locked down to
+                    <li>Production ran on my own <strong>AWS</strong> account first (S3 + CloudFront + Elastic Beanstalk + RDS).
+                        I then moved all of it onto <strong>the client's account</strong>: a hardened EC2 box in ap-south-1
+                        with an Elastic IP, nginx, systemd and Postgres. Scripted build/push deploys, a rehearsed DNS
+                        cutover, nothing lost.</li>
+                    <li><strong>Razorpay</strong> checkout with webhook signature verification, PDF invoicing and WhatsApp
+                        confirmations. Secrets come from SSM Parameter Store, and every auth path
+                        <strong>fails closed</strong> instead of issuing a forgeable session.</li>
+                    <li>Hardened the box and the app: TLS and security headers at nginx, rate limiting, Helmet, Zod
+                        validation on every route, and a systemd unit locked down with
                         <code>ProtectSystem=strict · NoNewPrivileges · MemoryMax</code>.</li>
-                    <li>Built <strong>Quadis Assist</strong>, an LLM concierge on Groq with a deterministic fallback, so the
-                        chat still answers guests when the model is unreachable.</li>
+                    <li><strong>Quadis Assist</strong> is an LLM concierge on Groq with a deterministic fallback, so guests
+                        still get an answer when the model is unreachable.</li>
                 </ul>
 
                 <div class="stack work-stack" aria-label="Quadis tech stack">
@@ -184,42 +225,42 @@
                         <a href="https://github.com/DsThakurRawat/Argus" target="_blank" rel="noopener" class="project-name">Argus</a>
                         <span class="tags"><span class="tag">Python</span></span>
                     </div>
-                    <p class="project-desc">A multi-agent AI system for cloud-infrastructure monitoring — incident triage, root-cause analysis, and automated patch generation.</p>
+                    <p class="project-desc">Multi-agent system for cloud-infrastructure monitoring: incident triage, root-cause analysis, automated patch generation.</p>
                 </li>
                 <li class="project">
                     <div class="project-head">
                         <a href="https://github.com/DsThakurRawat/Atomic-SRE" target="_blank" rel="noopener" class="project-name">Atomic-SRE</a>
                         <span class="tags"><span class="tag">Python</span></span>
                     </div>
-                    <p class="project-desc">Open-source multi-agent orchestration engine that automates the heavy lifting of Site Reliability Engineering.</p>
+                    <p class="project-desc">Open-source multi-agent orchestration engine for the repetitive parts of Site Reliability Engineering.</p>
                 </li>
                 <li class="project">
                     <div class="project-head">
                         <a href="https://github.com/DsThakurRawat/Autonomous-Multi-Agent-AI-Organization" target="_blank" rel="noopener" class="project-name">Autonomous Multi-Agent AI Organization</a>
                         <span class="tags"><span class="tag">Python</span></span>
                     </div>
-                    <p class="project-desc">An interaction-driven architecture where autonomous agents collaborate to execute tasks across software systems and devices.</p>
+                    <p class="project-desc">Autonomous agents that coordinate with each other to run tasks across software systems and devices.</p>
                 </li>
                 <li class="project">
                     <div class="project-head">
                         <a href="https://github.com/DsThakurRawat/Scientific-Analysis-And-Reproducible-Agentic-Network-Gateway" target="_blank" rel="noopener" class="project-name">SARANG — Agentic Research Gateway</a>
                         <span class="tags"><span class="tag">TypeScript</span></span>
                     </div>
-                    <p class="project-desc">An open-source, reproducible research environment built for professional researchers.</p>
+                    <p class="project-desc">Open-source, reproducible research environment for working researchers.</p>
                 </li>
                 <li class="project">
                     <div class="project-head">
                         <a href="https://github.com/DsThakurRawat/Geometric-Scene-Architect" target="_blank" rel="noopener" class="project-name">Geometric Scene Architect</a>
                         <span class="tags"><span class="tag">Python</span></span>
                     </div>
-                    <p class="project-desc">A production-grade, geometry-only pipeline for 3D indoor-scene semantic segmentation using unsupervised clustering.</p>
+                    <p class="project-desc">Geometry-only pipeline for 3D indoor-scene semantic segmentation, using unsupervised clustering.</p>
                 </li>
                 <li class="project">
                     <div class="project-head">
                         <a href="https://github.com/DsThakurRawat/anythingtopdf" target="_blank" rel="noopener" class="project-name">anythingtopdf</a>
                         <span class="tags"><span class="tag">TypeScript</span></span>
                     </div>
-                    <p class="project-desc">A small utility to convert just about anything into a clean PDF.</p>
+                    <p class="project-desc">Small utility that turns most file types into a readable PDF.</p>
                 </li>
             </ul>
 
@@ -230,14 +271,14 @@
                         <a href="https://github.com/Tracer-Cloud/opensre" target="_blank" rel="noopener" class="project-name">Tracer-Cloud / opensre</a>
                         <span class="tags"><span class="tag">Python</span><span class="tag tag-role">Contributor</span></span>
                     </div>
-                    <p class="project-desc">Build-your-own AI SRE agents — the open-source toolkit for the AI era. Merged PRs and resolved issues.</p>
+                    <p class="project-desc">Build-your-own AI SRE agents. Merged PRs and closed issues.</p>
                 </li>
                 <li class="project">
                     <div class="project-head">
                         <a href="https://github.com/FastCrest/tether" target="_blank" rel="noopener" class="project-name">FastCrest / tether</a>
                         <span class="tags"><span class="tag">Python</span><span class="tag tag-role">Lead Contributor</span></span>
                     </div>
-                    <p class="project-desc">An OSS edge-to-cloud AI deploy CLI — optimize, verify, and deploy across Jetson, RTX, Apple Silicon, and AMD.</p>
+                    <p class="project-desc">Edge-to-cloud AI deploy CLI: optimize, verify and deploy across Jetson, RTX, Apple Silicon and AMD.</p>
                 </li>
                 <li class="project">
                     <div class="project-head">
@@ -378,9 +419,9 @@
     </main>
 
     <footer class="footer">
-        <p>© 2026 Divyansh Rawat · Built with care.</p>
+        <p>© 2026 Divyansh Rawat · Hand-written HTML, no framework.</p>
     </footer>
 
-    <script src="main.js?v=7"></script>
+    <script src="main.js?v=8"></script>
 </body>
 </html>
