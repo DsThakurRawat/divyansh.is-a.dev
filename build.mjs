@@ -19,7 +19,7 @@ const SITE = {
     title: 'Divyansh Rawat',
     author: 'Divyansh Rawat',
     x: 'DsThakurRawat',
-    blogName: 'Writing',
+    blogName: 'Blogs and Writing',
     blogDesc: 'Notes on backend systems, agentic AI and the things I ship.',
     image: '/assets/pfp.jpeg?v=3',
 };
@@ -174,7 +174,7 @@ ${jsonld ? `    <script type="application/ld+json">\n${jsonld}\n    </script>\n`
                 <a href="/">Home</a>
                 <a href="/#work"><span class="nav-full">Featured Work</span><span class="nav-short">Work</span></a>
                 <a href="/#rnd"><span class="nav-full">Research &amp; Development</span><span class="nav-short">R&amp;D</span></a>
-                <a href="/blog" class="active">Writing</a>
+                <a href="/blog" class="active"><span class="nav-full">Blogs &amp; Writing</span><span class="nav-short">Blog</span></a>
             </nav>
             <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle color theme" title="Toggle theme">
                 <svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
@@ -445,7 +445,9 @@ async function main() {
         });
     }
 
-    all.sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
+    // Newest first. Slug breaks ties so two posts sharing a date don't
+    // reorder themselves between machines — set different dates to control it.
+    all.sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : a.slug < b.slug ? -1 : 1));
     const live = all.filter((p) => !p.draft);
 
     // Prev/next walk the published list so a draft never becomes a dead end.
