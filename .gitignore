@@ -4,3 +4,5 @@ node_modules/
 *.log
 temp_folder_1/
 temp_folder_2/
+.vercel
+.env*
